@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
+    --tool-width:1380px;
+    --reading-width:920px;
     --bg:#0a0d12;
     --panel:#12161d;
     --panel-2:#161b23;
@@ -39,9 +41,13 @@
 
   /* ---------- Header ---------- */
   .tool-header{
-    max-width:1180px;
+    max-width:var(--tool-width);
     margin:0 auto;
-    padding:56px 24px 32px;
+    padding:64px 24px 36px;
+  }
+  .tool-header .eyebrow{
+    width:min(100%, var(--reading-width));
+    margin:0 auto 14px;
   }
   .eyebrow{
     font-family:'JetBrains Mono',monospace;
@@ -49,7 +55,6 @@
     letter-spacing:0.12em;
     text-transform:uppercase;
     color:var(--accent);
-    margin-bottom:14px;
     display:flex;
     align-items:center;
     gap:10px;
@@ -70,12 +75,18 @@
     margin:0 0 18px;
     max-width:820px;
   }
+  .tool-header h1{
+    width:min(100%, var(--reading-width));
+    max-width:none;
+    margin:0 auto 18px;
+  }
   .tool-header p.lede{
-    font-size:16px;
-    line-height:1.65;
+    width:min(100%, var(--reading-width));
+    font-size:16.5px;
+    line-height:1.7;
     color:var(--muted);
-    max-width:660px;
-    margin:0 0 8px;
+    max-width:none;
+    margin:0 auto 8px;
   }
   .target-line{
     margin-top:22px;
@@ -91,8 +102,8 @@
   .target-line b{color:var(--muted);font-weight:500;}
 
   /* ---------- Layout shells ---------- */
-  main{max-width:1180px;margin:0 auto;padding:0 24px;}
-  section{margin-top:52px;}
+  main{max-width:var(--tool-width);margin:0 auto;padding:0 24px;}
+  section{margin-top:58px;}
   .section-head{
     display:flex;
     align-items:baseline;
@@ -114,17 +125,19 @@
     letter-spacing:0.08em;
   }
   .section-desc{
+    width:min(100%, var(--reading-width));
     color:var(--muted);
-    font-size:14.5px;
-    line-height:1.6;
-    max-width:640px;
-    margin:0 0 20px;
+    font-size:15px;
+    line-height:1.68;
+    max-width:none;
+    margin:0 auto 22px;
   }
 
   /* ---------- Mini lesson ---------- */
   .lesson-card{
-    max-width:760px;
-    margin:0 0 22px;
+    width:min(100%, var(--reading-width));
+    max-width:none;
+    margin:0 auto 24px;
     padding:18px 20px;
     background:linear-gradient(135deg, rgba(255,180,84,0.08), rgba(255,180,84,0.025));
     border:1px solid rgba(255,180,84,0.24);
@@ -464,7 +477,7 @@
   }
 
   footer{
-    max-width:1180px;
+    max-width:var(--tool-width);
     margin:70px auto 0;
     padding:26px 24px 0;
     border-top:1px solid var(--border);
@@ -488,7 +501,7 @@
     border-bottom:1px solid var(--border);
   }
   .sitenav-inner{
-    max-width:1180px;
+    max-width:var(--tool-width);
     margin:0 auto;
     padding:14px 24px;
     display:flex;
@@ -515,6 +528,11 @@
   .sitenav-links a:hover{color:var(--text);}
   .sitenav-links a.active{color:var(--accent);border-bottom-color:var(--accent);}
   body{padding-top:56px;}
+
+  @media (max-width:960px){
+    :root{--reading-width:760px;}
+    .tool-header{padding-top:48px;}
+  }
   @media (max-width:600px){
     .sitenav-inner{flex-direction:column;gap:8px;padding:12px 20px;}
     .sitenav-links{gap:16px;flex-wrap:wrap;justify-content:center;}
