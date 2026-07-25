@@ -285,7 +285,7 @@ body.home-body {
     color: var(--muted);
     line-height: 1.7;
     font-size: 1.05rem;
-    max-width: none;
+    max-width: 620px;
     margin-bottom: 2.5rem;
 }
 
@@ -399,50 +399,94 @@ body.home-body {
     filter: brightness(1.08);
 }
 /* =============================================================
-   ABOUT PAGE - BIOGRAPHY + PHOTO STORY
+   ABOUT PAGE - INTRO PANEL + BIOGRAPHY/SLIDESHOW
    ============================================================= */
 .about-page {
-    max-width: 1120px;
+    max-width: 1380px;
 }
 
-.about-intro {
-    max-width: 780px;
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: clamp(2.6rem, 4vw, 3.8rem);
+    padding: clamp(1.7rem, 3vw, 2.8rem);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at top left, rgba(255, 180, 84, 0.075), transparent 34%),
+        linear-gradient(180deg, rgba(20, 24, 33, 0.94), rgba(13, 17, 24, 0.9));
+    box-shadow: 0 24px 60px -42px rgba(0, 0, 0, 0.82);
 }
 
-.about-intro .page-lede {
+.about-hero::before {
+    content: "";
+    position: absolute;
+    left: clamp(1.7rem, 3vw, 2.8rem);
+    top: clamp(1.35rem, 2.4vw, 2rem);
+    width: 76px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), rgba(255, 180, 84, 0));
+    opacity: 0.88;
+}
+
+.about-hero-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    padding-top: 0.55rem;
+}
+
+.about-page .page-title {
+    font-size: clamp(2.55rem, 3.1vw, 3.7rem);
+    line-height: 1.02;
+    margin-bottom: 1.15rem;
+}
+
+.about-page .page-lede {
+    max-width: 860px;
+    font-size: clamp(1.05rem, 0.55vw + 0.92rem, 1.22rem);
+    line-height: 1.78;
+    margin-bottom: 1.35rem;
+}
+
+.about-hero-support {
     max-width: 760px;
-    margin-bottom: 3.25rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.72;
+    opacity: 0.9;
 }
 
 .about-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
-    gap: clamp(2.5rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 470px);
+    gap: clamp(2.6rem, 6vw, 5.5rem);
     align-items: start;
 }
 
+.about-body {
+    padding: 0.35rem 0 1rem clamp(0rem, 1vw, 0.65rem);
+}
+
 .about-copy {
-    max-width: 680px;
+    max-width: 790px;
 }
 
 .about-copy p {
     color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.85;
-    margin-bottom: 1.35rem;
+    font-size: 1.03rem;
+    line-height: 1.92;
+    margin-bottom: 1.5rem;
 }
 
 .about-copy p:last-child {
     margin-bottom: 0;
 }
 
-/* Keeping the biography left aligned is more readable than full
-   justification at this width. Add text-align: justify here later
-   if you decide you prefer the more formal editorial look. */
-
 .about-gallery {
     position: sticky;
-    top: 6.5rem;
+    top: 6.7rem;
+    align-self: start;
 }
 
 .about-gallery-heading {
@@ -458,20 +502,21 @@ body.home-body {
 }
 
 .about-gallery-heading p {
+    max-width: 390px;
     color: var(--muted);
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     line-height: 1.55;
-    max-width: 330px;
 }
 
 .about-carousel {
     position: relative;
-    aspect-ratio: 4 / 5;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    border-radius: 15px;
-    border: 1px solid var(--border-lit);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
     background: #05070a;
-    box-shadow: 0 24px 55px -32px rgba(0, 0, 0, 0.95);
+    box-shadow: 0 28px 65px -36px rgba(0, 0, 0, 0.95);
     isolation: isolate;
     outline: none;
 }
@@ -480,7 +525,7 @@ body.home-body {
     border-color: var(--accent);
     box-shadow:
         0 0 0 3px rgba(255, 180, 84, 0.16),
-        0 24px 55px -32px rgba(0, 0, 0, 0.95);
+        0 28px 65px -36px rgba(0, 0, 0, 0.95);
 }
 
 .about-slide {
@@ -500,12 +545,12 @@ body.home-body {
 
 .about-slide-backdrop {
     position: absolute;
-    inset: -8%;
+    inset: -10%;
     z-index: 0;
     background-image: var(--slide-image);
-    background-position: center;
+    background-position: var(--slide-position, center);
     background-size: cover;
-    filter: blur(25px) brightness(0.42) saturate(0.8);
+    filter: blur(28px) brightness(0.38) saturate(0.82);
     transform: scale(1.12);
 }
 
@@ -518,8 +563,9 @@ body.home-body {
     background:
         linear-gradient(
             to bottom,
-            rgba(5, 7, 10, 0.03) 45%,
-            rgba(5, 7, 10, 0.9) 100%
+            rgba(5, 7, 10, 0.04) 35%,
+            rgba(5, 7, 10, 0.78) 78%,
+            rgba(5, 7, 10, 0.94) 100%
         );
 }
 
@@ -527,10 +573,13 @@ body.home-body {
     position: relative;
     z-index: 1;
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 0.65rem;
+    width: calc(100% - 1.4rem);
+    height: calc(100% - 1.4rem);
+    margin: 0.7rem;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: var(--slide-position, center);
+    box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.85);
 }
 
 .about-slide figcaption {
@@ -540,7 +589,7 @@ body.home-body {
     bottom: 1rem;
     z-index: 3;
     color: var(--text);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     line-height: 1.45;
     text-shadow: 0 1px 12px rgba(0, 0, 0, 0.85);
 }
@@ -551,33 +600,34 @@ body.home-body {
     font-size: 0.64rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.22rem;
 }
 
 .about-carousel-controls {
     display: grid;
-    grid-template-columns: 36px 1fr 36px;
+    grid-template-columns: 40px 1fr 40px;
     align-items: center;
     gap: 0.8rem;
-    margin-top: 0.85rem;
+    margin-top: 0.95rem;
 }
 
 .about-carousel-arrow {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border-lit);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 999px;
-    background: var(--panel);
+    background: rgba(18, 22, 29, 0.72);
     color: var(--muted);
     cursor: pointer;
     font-size: 1rem;
     transition:
         color 0.2s ease,
         border-color 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 .about-carousel-arrow:hover,
@@ -585,6 +635,7 @@ body.home-body {
     color: var(--text);
     border-color: var(--accent);
     background: rgba(255, 180, 84, 0.08);
+    transform: translateY(-1px);
     outline: none;
 }
 
@@ -623,7 +674,14 @@ body.home-body {
     opacity: 1;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
+    .about-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 420px);
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 900px) {
     .about-layout {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -631,7 +689,7 @@ body.home-body {
 
     .about-gallery {
         position: static;
-        width: min(100%, 440px);
+        width: min(100%, 520px);
     }
 
     .about-gallery-heading p {
@@ -640,17 +698,41 @@ body.home-body {
 }
 
 @media (max-width: 600px) {
-    .about-intro .page-lede {
+    .about-hero {
         margin-bottom: 2.5rem;
+        padding: 1.4rem;
+        border-radius: 16px;
+    }
+
+    .about-page .page-title {
+        font-size: clamp(2.2rem, 8vw, 2.8rem);
+    }
+
+    .about-page .page-lede {
+        font-size: 1rem;
+        line-height: 1.72;
+    }
+
+    .about-hero-support {
+        font-size: 0.9rem;
     }
 
     .about-copy p {
-        font-size: 0.96rem;
-        line-height: 1.78;
+        font-size: 0.98rem;
+        line-height: 1.8;
     }
 
     .about-gallery {
         width: 100%;
+    }
+
+    .about-carousel-controls {
+        grid-template-columns: 36px 1fr 36px;
+    }
+
+    .about-carousel-arrow {
+        width: 36px;
+        height: 36px;
     }
 }
 
