@@ -19,16 +19,26 @@
     box-sizing: border-box;
 }
 
+html {
+    background: var(--bg);
+}
+
 body {
+    background: var(--bg);
     color: var(--text);
     font-family: var(--font-main);
     -webkit-font-smoothing: antialiased;
-    /* Centers the glass panel perfectly */
+}
+
+/* Homepage only: centers the glass panel perfectly, hides video overflow.
+   Applied via <body class="home-body"> on index.html - other pages need
+   normal document flow so their content isn't shrunk into a centered box. */
+body.home-body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    overflow: hidden; /* Prevents scrollbars from the video */
+    overflow: hidden;
 }
 
 .mono {
@@ -156,4 +166,234 @@ body {
         gap: 1rem;
         flex-direction: column;
     }
+}
+
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+    .bg-video {
+        display: none;
+    }
+    .bg-overlay {
+        background: var(--bg);
+    }
+}
+
+/* =============================================================
+   SITE-WIDE NAV (present on every page - home, about, work, art,
+   colour mapping). Lets people get around from anywhere, not just
+   the homepage hero.
+   ============================================================= */
+.sitenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: rgba(10, 13, 18, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-lit);
+}
+
+.sitenav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.sitenav-logo {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+}
+
+.sitenav-links {
+    display: flex;
+    gap: 1.75rem;
+    font-size: 0.8rem;
+}
+
+.sitenav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.sitenav-links a:hover {
+    color: var(--text);
+}
+
+.sitenav-links a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* --- Mobile nav: stack + wrap --- */
+@media (max-width: 600px) {
+    .sitenav-inner {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 0.85rem 1.25rem;
+    }
+    .sitenav-links {
+        gap: 1.1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* =============================================================
+   INTERIOR PAGE SHELL (about / work / art) - no video background,
+   just the base colour, so longer text stays easy to read.
+   ============================================================= */
+.page-shell {
+    min-height: 100vh;
+    padding: 7rem 1.5rem 5rem;
+    background: var(--bg);
+}
+
+.page-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-eyebrow {
+    color: var(--accent);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+}
+
+.page-lede {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin-bottom: 2.5rem;
+}
+
+/* --- Placeholder callouts: obvious, not meant to ship --- */
+.placeholder-note {
+    border: 1px dashed var(--border-lit);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.placeholder-note b {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+/* --- Work list --- */
+.work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.work-card {
+    background: var(--panel);
+    border: 1px solid var(--border-lit);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+}
+
+.work-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+}
+
+.work-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.work-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.work-tags span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    border: 1px solid var(--border-lit);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+}
+
+/* --- Art grid --- */
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .art-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.art-tile {
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    border: 1px dashed var(--border-lit);
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* --- CTA button (homepage hero) --- */
+.btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1206;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    margin-top: 0.5rem;
+    transition: filter 0.2s ease;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.08);
 }

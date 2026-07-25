@@ -4,35 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astrophysics Portfolio</title>
+    <meta name="description" content="Astrophysicist and developer working on galaxy mergers, narrowband colour mapping, and outreach.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <!-- Your Custom Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home-body">
     <!-- Background Video -->
     <video autoplay loop muted playsinline class="bg-video">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
     </video>
-    
+
     <!-- Dark Overlay to ensure text remains readable -->
     <div class="bg-overlay"></div>
+
+    <!-- Site-wide nav: same on every page -->
+    <header class="sitenav mono">
+        <div class="sitenav-inner">
+            <a href="index.html" class="sitenav-logo">Your Name</a>
+            <nav class="sitenav-links">
+                <a href="about.html">About</a>
+                <a href="work.html">Work</a>
+                <a href="art.html">Art</a>
+                <a href="pillars_channel_mapping.html">Colour Mapping</a>
+            </nav>
+        </div>
+    </header>
 
     <!-- Glass Centerpiece -->
     <main class="glass-panel">
         <div class="profile-pic"></div>
         <h1 class="name">Your Name</h1>
-        <p class="title mono">Astrophysicist & Developer</p>
+        <p class="title mono">Astrophysicist &amp; Developer</p>
         <p class="bio">I study the universe and build tools to understand it. Exploring galaxy mergers, narrowband mapping, and the spaces in between.</p>
-        
-        <!-- Navigation Links -->
-        <nav class="links mono">
-            <a href="#about">About Me</a>
-            <a href="#work">Work</a>
-            <a href="#art">Art</a>
-            <a href="#mapping">Color Mapping</a>
-        </nav>
+
+        <a href="pillars_channel_mapping.html" class="btn-primary">Try the colour mapping tool &rarr;</a>
     </main>
 </body>
 </html>
