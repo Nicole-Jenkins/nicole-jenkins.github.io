@@ -397,3 +397,19 @@ body.home-body {
 .btn-primary:hover {
     filter: brightness(1.08);
 }
+
+/* --- About page biography --- */
+.about-copy {
+    max-width: 680px;
+}
+
+.about-copy p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+}
+
+.about-copy p:last-child {
+    margin-bottom: 0;
+}
