@@ -6,6 +6,7 @@
     --text: #e8ecf1;
     --muted: #8a94a3;
     --accent: #ffb454;
+    --content-width: 1380px;
     
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Archivo', sans-serif;
@@ -196,7 +197,7 @@ body.home-body {
 }
 
 .sitenav-inner {
-    max-width: 1180px;
+    max-width: var(--content-width);
     margin: 0 auto;
     padding: 1rem 1.5rem;
     display: flex;
@@ -255,12 +256,12 @@ body.home-body {
    ============================================================= */
 .page-shell {
     min-height: 100vh;
-    padding: 7rem 1.5rem 5rem;
+    padding: 7rem clamp(1.5rem, 4vw, 3rem) 5rem;
     background: var(--bg);
 }
 
 .page-inner {
-    max-width: 800px;
+    max-width: var(--content-width);
     margin: 0 auto;
 }
 
@@ -284,7 +285,7 @@ body.home-body {
     color: var(--muted);
     line-height: 1.7;
     font-size: 1.05rem;
-    max-width: 620px;
+    max-width: none;
     margin-bottom: 2.5rem;
 }
 
