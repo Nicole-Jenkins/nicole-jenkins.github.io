@@ -38,7 +38,7 @@
   a{color:var(--accent);}
 
   /* ---------- Header ---------- */
-  header{
+  .tool-header{
     max-width:1180px;
     margin:0 auto;
     padding:56px 24px 32px;
@@ -70,7 +70,7 @@
     margin:0 0 18px;
     max-width:820px;
   }
-  header p.lede{
+  .tool-header p.lede{
     font-size:16px;
     line-height:1.65;
     color:var(--muted);
@@ -445,6 +445,9 @@
   /* ---------- Site-wide nav (matches portfolio pages) ---------- */
   .sitenav{
     position:fixed;
+    max-width:none;
+    margin:0;
+    padding:0;
     top:0; left:0; width:100%;
     z-index:20;
     background:rgba(10,13,18,0.72);
@@ -502,7 +505,7 @@
 </header>
 
 
-<header>
+<header class="tool-header">
   <div class="eyebrow mono">Channel mapping console</div>
   <h1>None of this is real colour. That's the point.</h1>
   <p class="lede">Narrowband astrophotos are recorded through filters so narrow they only let one gas's emission line through - greyscale, one wavelength at a time. Colour only appears when you decide which channel each greyscale layer feeds into. Below are three real exposures of the same object. Reassign them and watch what "true" colour even means here.</p>
