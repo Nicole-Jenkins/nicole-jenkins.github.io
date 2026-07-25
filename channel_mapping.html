@@ -524,8 +524,26 @@
       <div class="section-title">The three exposures</div>
       <div class="section-num mono">01 / SOURCES</div>
     </div>
-    <p class="section-desc">Each panel is one filtered exposure. The white marker on the spectrum strip shows the exact wavelength that filter isolates. Stretch, gamma and strength control how that greyscale data gets weighted before it lands in the composite - swap in your own filtered exposure with the button in the corner. Hα is the reference frame; [O III] and [S II] are automatically star-aligned to it, since even a few pixels of telescope drift between exposures shows up as coloured fringing around every star in the composite.</p>
+    <p class="section-desc">
+    Start by comparing the three greyscale exposures. Each filter isolates
+    light emitted by a different ion, so the same object can appear brighter,
+    darker, sharper or more detailed from one image to the next. Those
+    differences contain the information that becomes colour when the exposures
+    are assigned to the red, green and blue channels below.
+</p>
 
+<p class="section-desc">
+    Select <strong>Swap photo</strong> to replace the samples with your own
+    Hα, [O III] and [S II] images of the same target. The tool uses Hα as its
+    reference and automatically corrects simple horizontal and vertical drift
+    before building the composite.
+</p>
+
+<p class="note mono">
+    BASIC ALIGNMENT ONLY — Images should have the same orientation, scale and
+    approximate framing. Rotation, flipping and major framing differences are
+    not corrected.
+</p>
     <div class="sources" id="sourcesGrid"></div>
   </section>
 
