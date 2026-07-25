@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Channel Mapping</title>
+    <title>Astrophysics Portfolio</title>
     <!-- Your Custom Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,25 +11,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="logo mono">channel_mapping</div>
-        <nav>
-            <a href="#about" class="mono">About</a>
-            <a href="#contact" class="mono">Contact</a>
+    <!-- Background Video -->
+    <video autoplay loop muted playsinline class="bg-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Dark Overlay to ensure text remains readable -->
+    <div class="bg-overlay"></div>
+
+    <!-- Glass Centerpiece -->
+    <main class="glass-panel">
+        <div class="profile-pic"></div>
+        <h1 class="name">Your Name</h1>
+        <p class="title mono">Astrophysicist & Developer</p>
+        <p class="bio">I study the universe and build tools to understand it. Exploring galaxy mergers, narrowband mapping, and the spaces in between.</p>
+        
+        <!-- Navigation Links -->
+        <nav class="links mono">
+            <a href="#about">About Me</a>
+            <a href="#work">Work</a>
+            <a href="#art">Art</a>
+            <a href="#mapping">Color Mapping</a>
         </nav>
-    </header>
-
-    <main class="hero">
-        <div class="hero-content">
-            <div class="eyebrow mono">Coming Soon</div>
-            <h1>None of this is real color. That's the point.</h1>
-            <p class="lede">A visual tool for narrowband-to-RGB channel mapping.</p>
-            <a href="#signup" class="cta-button mono">Notify Me</a>
-        </div>
     </main>
-
-    <footer>
-        <p class="mono">Built as a teaching tool for narrowband-to-RGB channel mapping.</p>
-    </footer>
 </body>
 </html>
