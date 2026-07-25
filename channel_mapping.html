@@ -121,6 +121,38 @@
     margin:0 0 20px;
   }
 
+  /* ---------- Mini lesson ---------- */
+  .lesson-card{
+    max-width:760px;
+    margin:0 0 22px;
+    padding:18px 20px;
+    background:linear-gradient(135deg, rgba(255,180,84,0.08), rgba(255,180,84,0.025));
+    border:1px solid rgba(255,180,84,0.24);
+    border-left:3px solid var(--accent);
+    border-radius:var(--radius);
+  }
+  .lesson-label{
+    color:var(--accent);
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    margin-bottom:9px;
+  }
+  .lesson-card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.65;
+    margin:0 0 10px;
+  }
+  .lesson-card p:last-child{margin-bottom:0;}
+  .lesson-card strong{color:var(--text);font-weight:600;}
+  .lesson-caution{
+    padding-top:10px;
+    border-top:1px solid var(--border);
+    color:var(--muted-2) !important;
+    font-size:10.5px !important;
+    letter-spacing:0.03em;
+  }
+
   /* ---------- Source panels ---------- */
   .sources{
     display:grid;
@@ -524,26 +556,15 @@
       <div class="section-title">The three exposures</div>
       <div class="section-num mono">01 / SOURCES</div>
     </div>
-    <p class="section-desc">
-    Start by comparing the three greyscale exposures. Each filter isolates
-    light emitted by a different ion, so the same object can appear brighter,
-    darker, sharper or more detailed from one image to the next. Those
-    differences contain the information that becomes colour when the exposures
-    are assigned to the red, green and blue channels below.
-</p>
+    <div class="lesson-card">
+      <div class="lesson-label mono">WHAT TO LOOK FOR</div>
+      <p>Compare the three sample exposures before changing anything. Each filter isolates light from a different ion, so the same nebula appears brighter, darker, sharper or more detailed in different places. Those differences are the gas structure recorded in each wavelength - and they are what become colour when the layers are assigned to red, green and blue.</p>
+      <p><strong>Try your own images:</strong> select <strong>Swap photo</strong> on each panel and load three filtered exposures of the same target. Hα is used as the reference frame, and the other two images are automatically shifted horizontally and vertically to compensate for ordinary tracking drift before the composite is built.</p>
+      <p class="lesson-caution mono">BASIC ALIGNMENT ONLY - use images with the same orientation, scale and approximate framing. Rotation, flipping, resizing and major framing differences are not corrected.</p>
+    </div>
 
-<p class="section-desc">
-    Select <strong>Swap photo</strong> to replace the samples with your own
-    Hα, [O III] and [S II] images of the same target. The tool uses Hα as its
-    reference and automatically corrects simple horizontal and vertical drift
-    before building the composite.
-</p>
+    <p class="section-desc">Use the white marker on each spectrum strip to see the wavelength that filter isolates. The black point, white point, gamma and strength controls change how strongly each greyscale layer contributes to the final image.</p>
 
-<p class="note mono">
-    BASIC ALIGNMENT ONLY — Images should have the same orientation, scale and
-    approximate framing. Rotation, flipping and major framing differences are
-    not corrected.
-</p>
     <div class="sources" id="sourcesGrid"></div>
   </section>
 
