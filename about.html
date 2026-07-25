@@ -7,14 +7,13 @@
     <title>About - Astrophysics Portfolio</title>
     <meta
         name="description"
-        content="About page - background, research interests, and outreach work."
+        content="About Nicole - astrophysics research, science communication, art, wildlife care, and motorsport journalism."
     >
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet"
@@ -28,8 +27,8 @@
         <div class="sitenav-inner">
             <a href="index.html" class="sitenav-logo">Your Name</a>
 
-            <nav class="sitenav-links">
-                <a href="about.html" class="active">About</a>
+            <nav class="sitenav-links" aria-label="Primary navigation">
+                <a href="about.html" class="active" aria-current="page">About</a>
                 <a href="work.html">Work</a>
                 <a href="art.html">Art</a>
                 <a href="channel_mapping.html">Colour Mapping</a>
@@ -38,53 +37,301 @@
     </header>
 
     <main class="page-shell">
-        <div class="page-inner">
-            <div class="page-eyebrow mono">About</div>
+        <div class="page-inner about-page">
+            <div class="about-intro">
+                <div class="page-eyebrow mono">About</div>
 
-            <h1 class="page-title">Hi, I'm Nicole.</h1>
+                <h1 class="page-title">Hi, I'm Nicole.</h1>
 
-            <p class="page-lede">
-                My name is Nicole, and I am an astrophysics PhD student at the
-                University of Southern Queensland, where I completed my Honours
-                degree with First Class Honours, earning the University Medal,
-                before continuing on to my current doctoral research.
-            </p>
-
-            <section class="about-copy">
-                <p>
-                    Originally from Toowoomba, I now call Bribie Island home.
-                    Under the mentorship of Dr Rebecca McElroy, my PhD research
-                    focuses on merging galaxies and star formation, a field I
-                    hope to keep contributing to long into the future.
+                <p class="page-lede">
+                    My name is Nicole, and I am an astrophysics PhD student at the
+                    University of Southern Queensland, where I completed my Honours
+                    degree with First Class Honours, earning the University Medal,
+                    before continuing on to my current doctoral research.
                 </p>
+            </div>
 
-                <p>
-                    I haven’t always been a student, though. In the decade before
-                    returning to study, I worked in motorsport media for
-                    Australian Motorsport Magazine, travelling to outback
-                    Queensland to cover off-road and rally events, as well as
-                    spending time closer to home at Lakeside and Morgan Park
-                    Raceway in Warwick.
-                </p>
+            <div class="about-layout">
+                <section class="about-copy" aria-label="Biography">
+                    <p>
+                        Originally from Toowoomba, I now call Bribie Island home.
+                        Under the mentorship of Dr Rebecca McElroy, my PhD research
+                        focuses on merging galaxies and star formation, a field I
+                        hope to keep contributing to long into the future.
+                    </p>
 
-                <p>
-                    Before that, I spent time in New South Wales working as a
-                    veterinary nurse and wildlife carer for injured birds. A love
-                    of animals has followed me ever since, as has a love of art.
-                    I am an avid pencil artist, and my work spans pop-culture
-                    pieces and animal portraits, drawing on my love of science
-                    fiction, fantasy, and the natural world.
-                </p>
+                    <p>
+                        I haven’t always been a student, though. In the decade before
+                        returning to study, I worked in motorsport media for
+                        Australian Motorsport Magazine, travelling to outback
+                        Queensland to cover off-road and rally events, as well as
+                        spending time closer to home at Lakeside and Morgan Park
+                        Raceway in Warwick.
+                    </p>
 
-                <p>
-                    Outside of research, I try to stay connected to the broader
-                    community. I have organised astronomy outreach events and
-                    worked as a demonstrator for undergraduate physics, and I
-                    find that sharing science with people of all ages is one of
-                    the most rewarding parts of being a researcher.
-                </p>
-            </section>
+                    <p>
+                        Before that, I spent time in New South Wales working as a
+                        veterinary nurse and wildlife carer for injured birds. A love
+                        of animals has followed me ever since, as has a love of art.
+                        I am an avid pencil artist, and my work spans pop-culture
+                        pieces and animal portraits, drawing on my love of science
+                        fiction, fantasy, and the natural world.
+                    </p>
+
+                    <p>
+                        Outside of research, I try to stay connected to the broader
+                        community. I have organised astronomy outreach events and
+                        worked as a demonstrator for undergraduate physics, and I
+                        find that sharing science with people of all ages is one of
+                        the most rewarding parts of being a researcher.
+                    </p>
+                </section>
+
+                <aside class="about-gallery" aria-label="Photo slideshow">
+                    <div class="about-gallery-heading">
+                        <div class="about-gallery-kicker mono">Beyond the research</div>
+                        <p>Art, motorsport, wildlife, and the work that led me here.</p>
+                    </div>
+
+                    <div
+                        class="about-carousel"
+                        data-carousel
+                        tabindex="0"
+                        aria-roledescription="carousel"
+                        aria-label="Photos from art, motorsport journalism, and wildlife care"
+                    >
+                        <figure
+                            class="about-slide is-active"
+                            style="--slide-image: url('images/about/01-art-elephant.webp');"
+                            aria-hidden="false"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/01-art-elephant.webp"
+                                alt="Portrait beside a detailed pencil drawing of an elephant"
+                                loading="eager"
+                            >
+                            <figcaption>
+                                <span class="mono">Art</span>
+                                Pencil portraiture and wildlife drawing
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="about-slide"
+                            style="--slide-image: url('images/about/02-motorsport-buggy.webp');"
+                            aria-hidden="true"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/02-motorsport-buggy.webp"
+                                alt="Motorsport event selfie beside an off-road racing buggy"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                <span class="mono">Motorsport</span>
+                                Reporting from off-road and rally events
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="about-slide"
+                            style="--slide-image: url('images/about/03-wildlife-parrot.webp');"
+                            aria-hidden="true"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/03-wildlife-parrot.webp"
+                                alt="Smiling portrait with a green parrot"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                <span class="mono">Wildlife</span>
+                                A lifelong connection with birds and animals
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="about-slide"
+                            style="--slide-image: url('images/about/04-art-portrait.webp');"
+                            aria-hidden="true"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/04-art-portrait.webp"
+                                alt="Portrait beside a large work-in-progress fantasy artwork"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                <span class="mono">Art</span>
+                                Pop-culture, fantasy, and character studies
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="about-slide"
+                            style="--slide-image: url('images/about/05-motorsport-photographer.webp');"
+                            aria-hidden="true"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/05-motorsport-photographer.webp"
+                                alt="Motorsport photographer standing in a dusty event area"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                <span class="mono">Motorsport</span>
+                                Trackside photography and event coverage
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="about-slide"
+                            style="--slide-image: url('images/about/06-wildlife-cockatoo.webp');"
+                            aria-hidden="true"
+                        >
+                            <div class="about-slide-backdrop" aria-hidden="true"></div>
+                            <img
+                                src="images/about/06-wildlife-cockatoo.webp"
+                                alt="Portrait beside a pink and white cockatoo"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                <span class="mono">Wildlife</span>
+                                Curiosity, care, and the natural world
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="about-carousel-controls">
+                        <button
+                            class="about-carousel-arrow"
+                            type="button"
+                            data-carousel-prev
+                            aria-label="Show previous photo"
+                        >
+                            &#8592;
+                        </button>
+
+                        <div class="about-carousel-dots" aria-label="Choose a photo">
+                            <button class="is-active" type="button" data-carousel-dot="0" aria-label="Show photo 1" aria-current="true"></button>
+                            <button type="button" data-carousel-dot="1" aria-label="Show photo 2"></button>
+                            <button type="button" data-carousel-dot="2" aria-label="Show photo 3"></button>
+                            <button type="button" data-carousel-dot="3" aria-label="Show photo 4"></button>
+                            <button type="button" data-carousel-dot="4" aria-label="Show photo 5"></button>
+                            <button type="button" data-carousel-dot="5" aria-label="Show photo 6"></button>
+                        </div>
+
+                        <button
+                            class="about-carousel-arrow"
+                            type="button"
+                            data-carousel-next
+                            aria-label="Show next photo"
+                        >
+                            &#8594;
+                        </button>
+                    </div>
+                </aside>
+            </div>
         </div>
     </main>
+
+    <script>
+        (() => {
+            const carousel = document.querySelector('[data-carousel]');
+            if (!carousel) return;
+
+            const slides = [...carousel.querySelectorAll('.about-slide')];
+            const dots = [...document.querySelectorAll('[data-carousel-dot]')];
+            const previousButton = document.querySelector('[data-carousel-prev]');
+            const nextButton = document.querySelector('[data-carousel-next]');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            let currentIndex = 0;
+            let timer = null;
+            let userPaused = false;
+
+            const showSlide = (index) => {
+                currentIndex = (index + slides.length) % slides.length;
+
+                slides.forEach((slide, slideIndex) => {
+                    const isActive = slideIndex === currentIndex;
+                    slide.classList.toggle('is-active', isActive);
+                    slide.setAttribute('aria-hidden', String(!isActive));
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === currentIndex;
+                    dot.classList.toggle('is-active', isActive);
+
+                    if (isActive) {
+                        dot.setAttribute('aria-current', 'true');
+                    } else {
+                        dot.removeAttribute('aria-current');
+                    }
+                });
+            };
+
+            const stopTimer = () => {
+                if (timer !== null) {
+                    window.clearInterval(timer);
+                    timer = null;
+                }
+            };
+
+            const startTimer = () => {
+                stopTimer();
+
+                if (reduceMotion.matches || userPaused || document.hidden) return;
+
+                timer = window.setInterval(() => {
+                    showSlide(currentIndex + 1);
+                }, 6000);
+            };
+
+            const showPrevious = () => {
+                showSlide(currentIndex - 1);
+                startTimer();
+            };
+
+            const showNext = () => {
+                showSlide(currentIndex + 1);
+                startTimer();
+            };
+
+            previousButton?.addEventListener('click', showPrevious);
+            nextButton?.addEventListener('click', showNext);
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    showSlide(Number(dot.dataset.carouselDot));
+                    startTimer();
+                });
+            });
+
+            carousel.addEventListener('mouseenter', stopTimer);
+            carousel.addEventListener('mouseleave', startTimer);
+            carousel.addEventListener('focusin', stopTimer);
+            carousel.addEventListener('focusout', startTimer);
+
+            carousel.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    showPrevious();
+                }
+
+                if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    showNext();
+                }
+            });
+
+            document.addEventListener('visibilitychange', startTimer);
+            reduceMotion.addEventListener?.('change', startTimer);
+
+            showSlide(0);
+            startTimer();
+        })();
+    </script>
 </body>
 </html>
