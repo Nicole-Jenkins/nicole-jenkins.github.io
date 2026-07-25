@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astrophysics Portfolio</title>
-    <meta name="description" content="Astrophysicist and developer working on galaxy mergers, narrowband colour mapping, and outreach.">
+    <title>Nicole - Astrophysics Portfolio</title>
+    <meta
+        name="description"
+        content="Researching merging galaxies and star formation at the University of Southern Queensland. Former motorsport journalist and wildlife carer, current pencil artist, and passionate science communicator."
+    >
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <!-- Your Custom Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="home-body">
-    <!-- Background Video -->
     <video autoplay loop muted playsinline class="bg-video">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
     </video>
 
-    <!-- Dark Overlay to ensure text remains readable -->
     <div class="bg-overlay"></div>
 
-    <!-- Site-wide nav: same on every page -->
     <header class="sitenav mono">
         <div class="sitenav-inner">
             <a href="index.html" class="sitenav-logo">Your Name</a>
-            <nav class="sitenav-links">
+            <nav class="sitenav-links" aria-label="Primary navigation">
                 <a href="about.html">About</a>
                 <a href="work.html">Work</a>
                 <a href="art.html">Art</a>
@@ -34,14 +36,168 @@
         </div>
     </header>
 
-    <!-- Glass Centerpiece -->
-    <main class="glass-panel">
-        <div class="profile-pic"></div>
-        <h1 class="name">Your Name</h1>
-        <p class="title mono">Astrophysicist &amp; Developer</p>
-        <p class="bio">Researching merging galaxies and star formation at the University of Southern Queensland. Former motorsport journalist and wildlife carer, current pencil artist, and passionate science communicator.</p>
+    <main class="home-shell">
+        <section class="glass-panel home-hero">
+            <div class="home-copy">
+                <div class="home-eyebrow mono">Researcher • Artist • Communicator</div>
 
-        <a href="channel_mapping.html" class="btn-primary">Try the colour mapping tool &rarr;</a>
+                <div class="home-identity">
+                    <div class="profile-pic" aria-hidden="true"></div>
+
+                    <div class="home-identity-copy">
+                        <h1 class="name">Nicole</h1>
+                        <p class="title mono">Astrophysics PhD candidate • University of Southern Queensland</p>
+                    </div>
+                </div>
+
+                <p class="bio">
+                    Researching merging galaxies and star formation at the University of
+                    Southern Queensland. Former motorsport journalist and wildlife carer,
+                    current pencil artist, and passionate science communicator.
+                </p>
+
+                <div class="home-actions">
+                    <a href="about.html" class="btn-primary">Read more about me</a>
+                    <a href="channel_mapping.html" class="btn-secondary">Try the colour mapping tool</a>
+                </div>
+            </div>
+
+            <aside class="home-galaxy-panel" aria-label="Galaxy merger slideshow">
+                <div class="home-galaxy-heading">
+                    <div class="home-galaxy-kicker mono">Merger sequence</div>
+                    <p>
+                        A simple visual journey from early interaction to final coalescence.
+                        Drop in your own galaxy images later and the sequence will crossfade
+                        automatically.
+                    </p>
+                </div>
+
+                <div class="home-galaxy-carousel" data-home-carousel>
+                    <figure
+                        class="home-galaxy-slide is-active"
+                        aria-hidden="false"
+                        style="--slide-image: url('images/home/galaxy-01.jpg');"
+                    >
+                        <div class="home-galaxy-image" aria-hidden="true"></div>
+                        <figcaption>
+                            <span class="mono">01 / First approach</span>
+                            A close pair beginning to interact.
+                        </figcaption>
+                    </figure>
+
+                    <figure
+                        class="home-galaxy-slide"
+                        aria-hidden="true"
+                        style="--slide-image: url('images/home/galaxy-02.jpg');"
+                    >
+                        <div class="home-galaxy-image" aria-hidden="true"></div>
+                        <figcaption>
+                            <span class="mono">02 / Tidal encounter</span>
+                            Distortion, streams, and an increasingly shared structure.
+                        </figcaption>
+                    </figure>
+
+                    <figure
+                        class="home-galaxy-slide"
+                        aria-hidden="true"
+                        style="--slide-image: url('images/home/galaxy-03.jpg');"
+                    >
+                        <div class="home-galaxy-image" aria-hidden="true"></div>
+                        <figcaption>
+                            <span class="mono">03 / Deep merger</span>
+                            Overlapping systems with the nuclei drawing together.
+                        </figcaption>
+                    </figure>
+
+                    <figure
+                        class="home-galaxy-slide"
+                        aria-hidden="true"
+                        style="--slide-image: url('images/home/galaxy-04.jpg');"
+                    >
+                        <div class="home-galaxy-image" aria-hidden="true"></div>
+                        <figcaption>
+                            <span class="mono">04 / Coalescence</span>
+                            The late-stage merger as two galaxies become one.
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="home-galaxy-dots" aria-label="Choose a galaxy slide">
+                    <button class="is-active" type="button" data-home-dot="0" aria-label="Show slide 1" aria-current="true"></button>
+                    <button type="button" data-home-dot="1" aria-label="Show slide 2"></button>
+                    <button type="button" data-home-dot="2" aria-label="Show slide 3"></button>
+                    <button type="button" data-home-dot="3" aria-label="Show slide 4"></button>
+                </div>
+            </aside>
+        </section>
     </main>
+
+    <script>
+        (() => {
+            const carousel = document.querySelector('[data-home-carousel]');
+            if (!carousel) return;
+
+            const slides = [...carousel.querySelectorAll('.home-galaxy-slide')];
+            const dots = [...document.querySelectorAll('[data-home-dot]')];
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            let currentIndex = 0;
+            let timer = null;
+
+            const showSlide = (index) => {
+                currentIndex = (index + slides.length) % slides.length;
+
+                slides.forEach((slide, slideIndex) => {
+                    const isActive = slideIndex === currentIndex;
+                    slide.classList.toggle('is-active', isActive);
+                    slide.setAttribute('aria-hidden', String(!isActive));
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === currentIndex;
+                    dot.classList.toggle('is-active', isActive);
+
+                    if (isActive) {
+                        dot.setAttribute('aria-current', 'true');
+                    } else {
+                        dot.removeAttribute('aria-current');
+                    }
+                });
+            };
+
+            const stopTimer = () => {
+                if (timer !== null) {
+                    window.clearInterval(timer);
+                    timer = null;
+                }
+            };
+
+            const startTimer = () => {
+                stopTimer();
+
+                if (reduceMotion.matches || document.hidden) return;
+
+                timer = window.setInterval(() => {
+                    showSlide(currentIndex + 1);
+                }, 5500);
+            };
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    showSlide(Number(dot.dataset.homeDot));
+                    startTimer();
+                });
+            });
+
+            carousel.addEventListener('mouseenter', stopTimer);
+            carousel.addEventListener('mouseleave', startTimer);
+
+            document.addEventListener('visibilitychange', startTimer);
+            reduceMotion.addEventListener?.('change', startTimer);
+
+            showSlide(0);
+            startTimer();
+        })();
+    </script>
 </body>
 </html>
