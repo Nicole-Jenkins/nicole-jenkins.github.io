@@ -58,7 +58,7 @@
 
                 <div class="home-now">
                     <span class="home-now-label">Currently</span>
-                    <p>Measuring how galaxy mergers reshape where stars form using SAMI survey datacubes - and, on the side, working out what "colour" even means in a narrowband image (see the Colour Mapping tool above).</p>
+                    <p>Measuring how galaxy mergers shape where stars form using the SAMI Galaxy survey. On the side, working with narrowband data to create full-colour images (see the Colour Mapping tool above).</p>
                 </div>
             </div>
 
@@ -122,11 +122,15 @@
                     </figure>
                 </div>
 
-                <div class="home-galaxy-dots" aria-label="Choose a galaxy slide">
-                    <button class="is-active" type="button" data-home-dot="0" aria-label="Show slide 1" aria-current="true"></button>
-                    <button type="button" data-home-dot="1" aria-label="Show slide 2"></button>
-                    <button type="button" data-home-dot="2" aria-label="Show slide 3"></button>
-                    <button type="button" data-home-dot="3" aria-label="Show slide 4"></button>
+                <div class="home-galaxy-controls">
+                    <button class="home-galaxy-arrow" type="button" data-home-prev aria-label="Show previous slide">&#8592;</button>
+                    <div class="home-galaxy-dots" aria-label="Choose a galaxy slide">
+                        <button class="is-active" type="button" data-home-dot="0" aria-label="Show slide 1" aria-current="true"></button>
+                        <button type="button" data-home-dot="1" aria-label="Show slide 2"></button>
+                        <button type="button" data-home-dot="2" aria-label="Show slide 3"></button>
+                        <button type="button" data-home-dot="3" aria-label="Show slide 4"></button>
+                    </div>
+                    <button class="home-galaxy-arrow" type="button" data-home-next aria-label="Show next slide">&#8594;</button>
                 </div>
             </aside>
         </section>
@@ -181,6 +185,18 @@
                     showSlide(currentIndex + 1);
                 }, 5500);
             };
+
+            const previousButton = document.querySelector('[data-home-prev]');
+            const nextButton = document.querySelector('[data-home-next]');
+            
+            previousButton.addEventListener('click', () => {
+                showSlide(currentIndex - 1);
+                startTimer();
+            });
+            nextButton.addEventListener('click', () => {
+                showSlide(currentIndex + 1);
+                startTimer();
+            });
 
             dots.forEach((dot) => {
                 dot.addEventListener('click', () => {
