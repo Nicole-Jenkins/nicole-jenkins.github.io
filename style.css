@@ -275,10 +275,11 @@ body.home-body {
 
 .page-title {
     font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 2.2rem;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
+    font-weight: 800;
+    font-size: clamp(1.875rem, 4.4vw, 3.125rem); /* 30px–50px, matches Colour Mapping's h1 */
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.1rem;
 }
 
 .page-lede {
