@@ -1069,3 +1069,24 @@ body.home-body {
         transition: none;
     }
 }
+
+.home-now {
+    max-width: 620px;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border-lit);
+}
+.home-now-label {
+    display: block;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.55rem;
+}
+.home-now p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+}
