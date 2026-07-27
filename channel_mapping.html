@@ -822,9 +822,12 @@ function drawCover(ctx, img, size){
   ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
 }
 
-/* ================= BASIC STAR ALIGNMENT ================= */
-const ALIGN_DS = 160;
-const ALIGN_SEARCH = 40;
+/* ================= BASIC STAR ALIGNMENT (translation only) =================
+   Coarse-to-fine normalized cross-correlation on downsampled grayscale.
+   Good for frames from the same rig/target that have simply dithered
+   between exposures. Will not correct rotation, scale, or mismatched framing. */
+const ALIGN_DS = 192;     // tightened from 160
+const ALIGN_SEARCH = 24;  // tightened from 40
 
 function downsampleGray(gray, size, dsSize){
   const block = size/dsSize;
@@ -854,19 +857,23 @@ function estimateShift(refGray, tgtGray){
   const refDS = zeroMean(downsampleGray(refGray, WORK_SIZE, ALIGN_DS));
   const tgtDS = zeroMean(downsampleGray(tgtGray, WORK_SIZE, ALIGN_DS));
   const m = ALIGN_SEARCH;
+
   function scoreAt(dy,dx){
     let sum=0,n=0;
     for(let y=m;y<ALIGN_DS-m;y++){
       const ty=y+dy;
+      if(ty < 0 || ty >= ALIGN_DS) continue;
       const rowR=y*ALIGN_DS, rowT=ty*ALIGN_DS;
       for(let x=m;x<ALIGN_DS-m;x++){
         const tx=x+dx;
-        sum+=refDS[rowR+x]*tgtDS[rowT+tx];
+        if(tx < 0 || tx >= ALIGN_DS) continue;
+        sum += refDS[rowR+x]*tgtDS[rowT+tx];
         n++;
       }
     }
     return n? sum/n : -Infinity;
   }
+
   let best={dy:0,dx:0,score:-Infinity};
   for(let dy=-m; dy<=m; dy+=4){
     for(let dx=-m; dx<=m; dx+=4){
@@ -874,6 +881,7 @@ function estimateShift(refGray, tgtGray){
       if(s>best.score) best={dy,dx,score:s};
     }
   }
+
   let refined={...best};
   for(let dy=best.dy-4; dy<=best.dy+4; dy++){
     for(let dx=best.dx-4; dx<=best.dx+4; dx++){
@@ -881,6 +889,7 @@ function estimateShift(refGray, tgtGray){
       if(s>refined.score) refined={dy,dx,score:s};
     }
   }
+
   const scale = WORK_SIZE/ALIGN_DS;
   return {dy: refined.dy*scale, dx: refined.dx*scale, score: refined.score};
 }
@@ -907,15 +916,30 @@ function alignSourceToReference(id){
   if(id===REFERENCE_ID || !state[REFERENCE_ID]) return;
   const st = state[id];
   const ref = state[REFERENCE_ID];
+
   const {dy, dx, score} = estimateShift(ref.rawGray, st.rawGray);
+  const dist = Math.sqrt(dy*dy + dx*dx);
+
+  // Guardrails: avoid applying obviously bad matches
+  const goodScore = score >= 0.08;
+  const goodDist  = dist <= 80;
+
+  if(!(goodScore && goodDist)){
+    st.gray = st.rawGray;
+    st.lastShift = {dy: 0, dx: 0};
+    const badge = document.getElementById('align-'+id);
+    if(badge){
+      badge.innerHTML = `<span class="warn">low-confidence align · using unshifted</span><button data-realign="${id}">Re-align</button>`;
+    }
+    return;
+  }
+
   st.gray = shiftGray(st.rawGray, WORK_SIZE, dy, dx);
   st.lastShift = {dy, dx};
+
   const badge = document.getElementById('align-'+id);
   if(badge){
-    const dist = Math.sqrt(dy*dy+dx*dx);
-    const quality = score > 0.15 ? 'ok' : 'warn';
-    const label = score > 0.15 ? 'aligned' : 'low-confidence align';
-    badge.innerHTML = `<span class="${quality}">${label} · Δ${dist.toFixed(1)}px</span><button data-realign="${id}">Re-align</button>`;
+    badge.innerHTML = `<span class="ok">aligned · Δ${dist.toFixed(1)}px</span><button data-realign="${id}">Re-align</button>`;
   }
 }
 
