@@ -811,10 +811,15 @@ body.home-body {
 
 .home-now {
     max-width: 620px;
-    padding-top: 1.1rem;
     border-top: 1px solid var(--border-lit);
+
+    /* center divider between para 1 and para 2 */
     margin-top: auto;
     margin-bottom: auto;
+
+    /* remove glue-to-heading behavior */
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 @media (max-width: 980px) {
