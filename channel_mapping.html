@@ -645,9 +645,9 @@ const SOURCES = [
   {id:'oiii', name:'[O III]',wavelength:502, color:'var(--oiii)', rgb:[56,232,198], data:"502nmos.jpg"}
 ];
 const REFERENCE_ID = 'ha';
-const WORK_SIZE = 620; // internal processing resolution
+const WORK_SIZE = 620; 
 
-const state = {}; // id -> {img, canvas, ctx, gray:Float32Array, black, white, gamma, strength}
+const state = {}; 
 let assignment = {R:'sii', G:'ha', B:'oiii'};
 let scnrOn = true, scnrStrength = 70;
 
@@ -714,7 +714,7 @@ const chanMeta = {
   assignBar.appendChild(slot);
 });
 
-/* ================= FITS PARSER (LIGHTWEIGHT BROWSER-SIDE) ================= */
+/* ================= FITS PARSER ================= */
 async function parseFITSFile(arrayBuffer) {
   const view = new DataView(arrayBuffer);
   let headerParsed = false;
@@ -748,7 +748,7 @@ async function parseFITSFile(arrayBuffer) {
       val = view.getUint8(byteOffset);
       byteOffset += 1;
     } else if (bitpix === 16) {
-      val = view.getInt16(byteOffset, false); // Big-endian
+      val = view.getInt16(byteOffset, false);
       byteOffset += 2;
     } else if (bitpix === 32) {
       val = view.getInt32(byteOffset, false);
@@ -763,7 +763,6 @@ async function parseFITSFile(arrayBuffer) {
     rawPixels[i] = val * bscale + bzero;
   }
 
-  // Find dynamic range for auto-stretch normalization
   let min = Infinity, max = -Infinity;
   for (let i = 0; i < numPixels; i++) {
     if (rawPixels[i] < min) min = rawPixels[i];
@@ -771,7 +770,6 @@ async function parseFITSFile(arrayBuffer) {
   }
   const span = max - min || 1;
 
-  // Resample and flip vertically to match canvas orientation (bottom-left to top-left origin)
   const gray = new Float32Array(WORK_SIZE * WORK_SIZE);
   for (let y = 0; y < WORK_SIZE; y++) {
     const fy = y / WORK_SIZE;
@@ -788,11 +786,23 @@ async function parseFITSFile(arrayBuffer) {
 }
 
 /* ================= LOAD IMAGES / FITS ================= */
+function createFallback(id, onReady) {
+  const rawGray = new Float32Array(WORK_SIZE*WORK_SIZE);
+  state[id] = Object.assign(state[id]||{}, {
+    rawGray, gray: rawGray,
+    black: 2/100, white: 88/100, gamma: 1.0, strength: 1.0
+  });
+  onReady();
+}
+
 function loadSource(src, onReady){
   const isFITS = src.data.endsWith('.fits') || src.data.endsWith('.fit') || src.data.endsWith('.fts');
   if (isFITS) {
     fetch(src.data)
-      .then(res => res.arrayBuffer())
+      .then(res => {
+        if(!res.ok) throw new Error("File not found");
+        return res.arrayBuffer();
+      })
       .then(async buffer => {
         const gray = await parseFITSFile(buffer);
         state[src.id] = Object.assign(state[src.id]||{}, {
@@ -800,17 +810,31 @@ function loadSource(src, onReady){
           black: 2/100, white: 88/100, gamma: 1.0, strength: 1.0
         });
         onReady();
+      })
+      .catch(err => {
+        console.error("FITS Load Error:", err);
+        createFallback(src.id, onReady);
       });
   } else {
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    // Removed strict crossOrigin block to allow local file testing
     img.onload = ()=>{
-      const rawGray = grayFromImage(img);
-      state[src.id] = Object.assign(state[src.id]||{}, {
-        img, rawGray, gray: rawGray,
-        black: 2/100, white: 88/100, gamma: 1.0, strength: 1.0
-      });
+      try {
+        const rawGray = grayFromImage(img);
+        state[src.id] = Object.assign(state[src.id]||{}, {
+          img, rawGray, gray: rawGray,
+          black: 2/100, white: 88/100, gamma: 1.0, strength: 1.0
+        });
+      } catch (e) {
+        console.error("Canvas blocked by local security:", e);
+        createFallback(src.id, onReady);
+        return;
+      }
       onReady();
+    };
+    img.onerror = ()=>{
+      console.error("Image load failed:", src.data);
+      createFallback(src.id, onReady);
     };
     img.src = src.data;
   }
@@ -837,7 +861,7 @@ function drawCover(ctx, img, size){
   ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
 }
 
-/* ================= BASIC STAR ALIGNMENT (translation only) ================= */
+/* ================= BASIC STAR ALIGNMENT ================= */
 const ALIGN_DS = 160;
 const ALIGN_SEARCH = 40;
 
