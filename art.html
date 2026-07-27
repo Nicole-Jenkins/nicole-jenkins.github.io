@@ -72,6 +72,16 @@
             padding: clamp(1rem, 3vw, 2rem);
         }
 
+        .art-modal-figure {
+            margin: 0;
+            width: 100%;
+            max-height: calc(min(92vh, 920px) - 70px);
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) auto;
+            gap: 0.5rem; /* slightly tighter gap between image and caption */
+            justify-items: center;
+        }
+
         .art-modal-backdrop {
             position: absolute;
             inset: 0;
