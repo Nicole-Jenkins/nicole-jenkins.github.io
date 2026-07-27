@@ -813,7 +813,8 @@ body.home-body {
     max-width: 620px;
     padding-top: 1.1rem;
     border-top: 1px solid var(--border-lit);
-    margin-top: auto; /* key line */
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 @media (max-width: 980px) {
@@ -822,12 +823,19 @@ body.home-body {
         align-items: start;
     }
 
-    .home-copy {
+    .home-copy,
+    .home-galaxy-panel {
         height: auto;
     }
 
     .home-now {
         margin-top: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .home-galaxy-controls {
+        margin-top: 0.95rem;
+        padding-top: 0;
     }
 
     .home-galaxy-carousel {
@@ -890,7 +898,7 @@ body.home-body {
 
 .home-hero .bio {
     max-width: 720px;
-    margin-bottom: 1.9rem;
+    margin-bottom: 0;
     font-size: clamp(1.04rem, 1vw + 0.75rem, 1.2rem);
     line-height: 1.82;
 }
@@ -924,6 +932,9 @@ body.home-body {
 
 .home-galaxy-panel {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .home-galaxy-heading {
@@ -1025,13 +1036,16 @@ body.home-body {
     justify-content: center;
     gap: 0.55rem;
 }
+
 .home-galaxy-controls {
     display: grid;
     grid-template-columns: 40px 1fr 40px;
     align-items: center;
     gap: 0.8rem;
-    margin-top: 0.95rem;
+    margin-top: auto;
+    padding-top: 0.95rem;
 }
+
 .home-galaxy-arrow {
     width: 40px;
     height: 40px;
@@ -1079,17 +1093,6 @@ body.home-body {
     opacity: 1;
 }
 
-@media (max-width: 980px) {
-    .glass-panel.home-hero {
-        grid-template-columns: 1fr;
-        align-items: start;
-    }
-
-    .home-galaxy-carousel {
-        min-height: 360px;
-    }
-}
-
 @media (max-width: 640px) {
     body.home-body {
         padding-top: 8.5rem;
@@ -1128,11 +1131,6 @@ body.home-body {
     }
 }
 
-.home-now {
-    max-width: 620px;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--border-lit);
-}
 .home-now-label {
     display: block;
     color: var(--accent);
@@ -1142,6 +1140,7 @@ body.home-body {
     text-transform: uppercase;
     margin-bottom: 0.55rem;
 }
+
 .home-now p {
     color: var(--muted);
     font-size: 0.95rem;
