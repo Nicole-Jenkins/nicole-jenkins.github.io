@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
   :root{
     --tool-width:1380px;
@@ -486,47 +487,7 @@
     font-size:11.5px;
     line-height:1.7;
   }
-
-  /* ---------- Site-wide nav (matches portfolio pages) ---------- */
-  .sitenav{
-    position:fixed;
-    max-width:none;
-    margin:0;
-    padding:0;
-    top:0; left:0; width:100%;
-    z-index:20;
-    background:rgba(10,13,18,0.72);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-  }
-  .sitenav-inner{
-    max-width:var(--tool-width);
-    margin:0 auto;
-    padding:14px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:3rem;
-  }
-  .sitenav-logo{
-    color:var(--text);
-    text-decoration:none;
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-    letter-spacing:0.04em;
-  }
-  .sitenav-links{display:flex;gap:28px;font-size:12px;}
-  .sitenav-links a{
-    color:var(--muted);
-    text-decoration:none;
-    padding-bottom:3px;
-    border-bottom:1px solid transparent;
-    font-family:'JetBrains Mono',monospace;
-    transition:color 0.2s ease, border-color 0.2s ease;
-  }
-  .sitenav-links a:hover{color:var(--text);}
-  .sitenav-links a.active{color:var(--accent);border-bottom-color:var(--accent);}
+  
   body{padding-top:56px;}
 
   @media (max-width:960px){
@@ -640,9 +601,9 @@
 <script>
 /* ================= DATA ================= */
 const SOURCES = [
-  {id:'sii',  name:'[S II]', wavelength:673, color:'var(--sii)',  rgb:[255,47,84],  data:"673nmos.jpg"},
-  {id:'ha',   name:'Hα',     wavelength:656, color:'var(--ha)',   rgb:[255,77,77],  data:"656nmos.jpg"},
-  {id:'oiii', name:'[O III]',wavelength:502, color:'var(--oiii)', rgb:[56,232,198], data:"502nmos.jpg"}
+  {id:'sii',  name:'[S II]', wavelength:673, color:'var(--sii)',  rgb:[255,47,84],  data:"images/channel-mapping/673nmos.png"},
+  {id:'ha',   name:'Hα',     wavelength:656, color:'var(--ha)',   rgb:[255,77,77],  data:"images/channel-mapping/656nmos.png", isReference:true},
+  {id:'oiii', name:'[O III]',wavelength:502, color:'var(--oiii)', rgb:[56,232,198], data:"images/channel-mapping/502nmos.png"}
 ];
 const REFERENCE_ID = 'ha';
 const WORK_SIZE = 620; 
@@ -861,9 +822,12 @@ function drawCover(ctx, img, size){
   ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
 }
 
-/* ================= BASIC STAR ALIGNMENT ================= */
-const ALIGN_DS = 160;
-const ALIGN_SEARCH = 40;
+/* ================= BASIC STAR ALIGNMENT (translation only) =================
+   Coarse-to-fine normalized cross-correlation on downsampled grayscale.
+   Good for frames from the same rig/target that have simply dithered
+   between exposures. Will not correct rotation, scale, or mismatched framing. */
+const ALIGN_DS = 192;     // tightened from 160
+const ALIGN_SEARCH = 24;  // tightened from 40
 
 function downsampleGray(gray, size, dsSize){
   const block = size/dsSize;
@@ -893,19 +857,23 @@ function estimateShift(refGray, tgtGray){
   const refDS = zeroMean(downsampleGray(refGray, WORK_SIZE, ALIGN_DS));
   const tgtDS = zeroMean(downsampleGray(tgtGray, WORK_SIZE, ALIGN_DS));
   const m = ALIGN_SEARCH;
+
   function scoreAt(dy,dx){
     let sum=0,n=0;
     for(let y=m;y<ALIGN_DS-m;y++){
       const ty=y+dy;
+      if(ty < 0 || ty >= ALIGN_DS) continue;
       const rowR=y*ALIGN_DS, rowT=ty*ALIGN_DS;
       for(let x=m;x<ALIGN_DS-m;x++){
         const tx=x+dx;
-        sum+=refDS[rowR+x]*tgtDS[rowT+tx];
+        if(tx < 0 || tx >= ALIGN_DS) continue;
+        sum += refDS[rowR+x]*tgtDS[rowT+tx];
         n++;
       }
     }
     return n? sum/n : -Infinity;
   }
+
   let best={dy:0,dx:0,score:-Infinity};
   for(let dy=-m; dy<=m; dy+=4){
     for(let dx=-m; dx<=m; dx+=4){
@@ -913,6 +881,7 @@ function estimateShift(refGray, tgtGray){
       if(s>best.score) best={dy,dx,score:s};
     }
   }
+
   let refined={...best};
   for(let dy=best.dy-4; dy<=best.dy+4; dy++){
     for(let dx=best.dx-4; dx<=best.dx+4; dx++){
@@ -920,6 +889,7 @@ function estimateShift(refGray, tgtGray){
       if(s>refined.score) refined={dy,dx,score:s};
     }
   }
+
   const scale = WORK_SIZE/ALIGN_DS;
   return {dy: refined.dy*scale, dx: refined.dx*scale, score: refined.score};
 }
@@ -946,15 +916,30 @@ function alignSourceToReference(id){
   if(id===REFERENCE_ID || !state[REFERENCE_ID]) return;
   const st = state[id];
   const ref = state[REFERENCE_ID];
+
   const {dy, dx, score} = estimateShift(ref.rawGray, st.rawGray);
+  const dist = Math.sqrt(dy*dy + dx*dx);
+
+  // Guardrails: avoid applying obviously bad matches
+  const goodScore = score >= 0.08;
+  const goodDist  = dist <= 80;
+
+  if(!(goodScore && goodDist)){
+    st.gray = st.rawGray;
+    st.lastShift = {dy: 0, dx: 0};
+    const badge = document.getElementById('align-'+id);
+    if(badge){
+      badge.innerHTML = `<span class="warn">low-confidence align · using unshifted</span><button data-realign="${id}">Re-align</button>`;
+    }
+    return;
+  }
+
   st.gray = shiftGray(st.rawGray, WORK_SIZE, dy, dx);
   st.lastShift = {dy, dx};
+
   const badge = document.getElementById('align-'+id);
   if(badge){
-    const dist = Math.sqrt(dy*dy+dx*dx);
-    const quality = score > 0.15 ? 'ok' : 'warn';
-    const label = score > 0.15 ? 'aligned' : 'low-confidence align';
-    badge.innerHTML = `<span class="${quality}">${label} · Δ${dist.toFixed(1)}px</span><button data-realign="${id}">Re-align</button>`;
+    badge.innerHTML = `<span class="ok">aligned · Δ${dist.toFixed(1)}px</span><button data-realign="${id}">Re-align</button>`;
   }
 }
 

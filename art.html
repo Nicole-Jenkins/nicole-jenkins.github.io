@@ -10,42 +10,396 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .art-tile {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.75);
+        }
+
+        .art-button {
+            appearance: none;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .art-button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
+        .art-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 220ms ease, filter 220ms ease;
+        }
+
+        .art-button:hover img,
+        .art-button:focus-visible img {
+            transform: scale(1.03);
+            filter: brightness(1.06);
+        }
+
+        .art-modal[hidden] {
+            display: none;
+        }
+
+        .art-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            display: grid;
+            place-items: center;
+            padding: clamp(1rem, 3vw, 2rem);
+        }
+
+        .art-modal-figure {
+            margin: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(15, 20, 28, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px -28px rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .art-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 8, 14, 0.72);
+            backdrop-filter: blur(9px);
+            -webkit-backdrop-filter: blur(9px);
+        }
+
+        .art-modal-dialog {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 980px);
+            max-height: min(92vh, 920px);
+            overflow-y: auto; /* safety net: scroll rather than silently clip, if this ever runs out of room again */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .art-modal-image-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .art-modal-image {
+            display: block;
+            max-width: 100%;
+            max-height: calc(min(92vh, 920px) - 150px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .art-modal-caption {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 640px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #f5f7fb;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            padding: 0.9rem 1.4rem 1.2rem;
+        }
+
+        .art-modal-close,
+        .art-modal-nav {
+            position: absolute;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(17, 22, 30, 0.82);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            line-height: 1;
+            transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+        }
+
+        .art-modal-close:hover,
+        .art-modal-close:focus-visible,
+        .art-modal-nav:hover,
+        .art-modal-nav:focus-visible {
+            background: rgba(var(--accent-rgb), 0.16);
+            border-color: var(--accent);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .art-modal-close {
+            top: 0.35rem;
+            right: 0.35rem;
+        }
+
+        .art-modal-nav.prev {
+            left: 0.35rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .art-modal-nav.next {
+            right: 0.35rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .art-modal-nav.prev:hover,
+        .art-modal-nav.prev:focus-visible,
+        .art-modal-nav.next:hover,
+        .art-modal-nav.next:focus-visible {
+            transform: translateY(-50%) scale(1.02);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .art-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .art-modal {
+                padding: 0.8rem;
+            }
+
+            .art-modal-image {
+                max-height: calc(92vh - 190px);
+            }
+
+            .art-modal-close,
+            .art-modal-nav {
+                width: 38px;
+                height: 38px;
+            }
+
+            .art-modal-nav.prev {
+                left: 0.2rem;
+            }
+
+            .art-modal-nav.next {
+                right: 0.2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .art-button img,
+            .art-modal-close,
+            .art-modal-nav {
+                transition: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sitenav mono">
         <div class="sitenav-inner">
             <a href="index.html" class="sitenav-logo">Nicole Jenkins</a>
-            <nav class="sitenav-links">
+            <nav class="sitenav-links" aria-label="Primary navigation">
                 <a href="about.html">About</a>
                 <a href="work.html">Work</a>
-                <a href="art.html" class="active">Art</a>
+                <a href="art.html" class="active" aria-current="page">Art</a>
                 <a href="channel_mapping.html">Colour Mapping</a>
             </nav>
         </div>
     </header>
 
-    <div class="page-shell">
+    <main class="page-shell">
         <div class="page-inner">
             <div class="page-eyebrow mono">Gallery</div>
             <h1 class="page-title">Art</h1>
-            <p class="page-lede">A grid for pencil work, or anything else worth showing outside the research.</p>
+            <p class="page-lede">A selection of my pencil work, from most recent to older works.</p>
 
-            <div class="placeholder-note mono">
-                <b>Placeholder - replace these tiles</b>
-                Put image files in an <code>/images/</code> folder in your repo, then swap each tile below for
-                <code>&lt;img src="images/yourfile.jpg" alt="short description"&gt;</code> in place of the placeholder text.
-                Keep the <code>art-tile</code> class on the wrapper so the grid spacing stays consistent.
-            </div>
+            <section class="art-grid" aria-label="Artwork gallery">
+                <div class="art-tile">
+                    <button
+                      class="art-button"
+                      type="button"
+                      data-art-index="0"
+                      data-caption="Shoebill Stork - Pencil artwork drawn with Prismacolor Premier and Faber-Castell Polychromos coloured pencils on Canson Mi Tientes A3 black paper. Reference image: Rai - Adobe Stock. Completed: Dec 2024"
+                    >
+                      <img src="images/art/shoebill.jpg" alt="Shoebill Stork coloured pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="1" data-caption="Sir Gentleborb - Pencil artwork drawn with Prismacolor Premier and Faber-Castell Polychromos coloured pencils on Canson Mi Tientes A4 sand-toned paper. Reference image (with permission): June Irwin. Completed: Feb 2022">
+                        <img src="images/art/sir-gentleborb.jpg" alt="Sir Gentleborb pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="2" data-caption="Cupcake - Pencil artwork drawn with Faber-Castell Polychromos pencils and Pearl Burnish Liquid White on Canson Mi Tientes A4 white paper. Reference image: Ruth Black - Adobe Stock. Completed: Jan 2021">
+                        <img src="images/art/cupcake.jpg" alt="Cupcake pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="5" data-caption="Propagation - Commission work drawn on Fabriano Artistico Hot Pressed A3 Watercolour paper with Faber-Castell Polychromos pencils and Pearl Burnish Liquid White. Completed: Feb 2021">
+                        <img src="images/art/propagation.jpg" alt="Propagation pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="3" data-caption="Spike - Drawn for a close friend and signed by the actor at Brisbane Comic Con. Faber-Castell Polychromos pencils on Canson Black Artist Series A3 paper. Completed: Mar 2020">
+                        <img src="images/art/spike.jpg" alt="Spike pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="4" data-caption="Grogu - Pencil artwork drawn with Polychromos pencils on Canson Black Artist Series A4 paper. Reference image from the show. Completed: Dec 2019">
+                        <img src="images/art/grogu.jpg" alt="Grogu pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="8" data-caption="Helmeted Honeyeater - Pencil drawing as a fundraiser to raise money for the conservation efforts of the Victorian Helmeted Honeyeater birds. Drawn using Prismacolor Premier and Faber-Castell Polychromos pencils on Canson 220 A3 drawing paper. Reference image (with permission): Chris Daley. Completed: Jan 2018">
+                        <img src="images/art/helmeted-honeyeater.jpg" alt="Helmeted honeyeater pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="7" data-caption="Memories - Pencil artwork drawn with Staedtler Graphites and Faber Castell 9000, drawn on Canson Cotton Drawing Edition A3 paper. Reference image (with permission): Paul Fine. Completed: May 2018">
+                        <img src="images/art/memories.jpg" alt="Memories pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="6" data-caption="Harvest Mouse - Pencil artwork drawn with Prismacolour Premier and Faber-Castell Polychromos on Canson's A3 Cotton Drawing Edition paper. Reference image (with permission): Paul Fine. Completed: Oct 2018">
+                        <img src="images/art/harvest-mouse.jpg" alt="Harvest mouse pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="11" data-caption="Fire and Ice - Prismacolor Premier and Faber-Castell Polychromos pencils on A2 paper. Completed: Feb 2017">
+                        <img src="images/art/fire-and-ice.jpg" alt="Fire and Ice pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="10" data-caption="Allanon - Pencil artwork drawn with Prismacolor Premier pencils on Canson A3 drawing paper. This piece was purchased by Manu Bennett, the actor playing the character Allanon in the TV series 'The Shannara Chronicles'. Completed: Apr 2017">
+                        <img src="images/art/allanon.jpg" alt="Allanon pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="9" data-caption="Kingfisher - Pencil artwork drawn with Prismacolor Premier and Faber-Castell Polychromos on A3 Canson Drawing paper. Reference image: Pixabay. Completed: Aug 2017">
+                        <img src="images/art/kingfisher.jpg" alt="Kingfisher pencil artwork" loading="lazy">
+                    </button>
+                </div>
+                <div class="art-tile">
+                    <button class="art-button" type="button" data-art-index="12" data-caption="Iron Man - Pencil drawing completed as a surprise for a friend. Drawn using Faber-Castell Polychromos on Canson A3 Drawing paper. Completed: Dec 2015">
+                        <img src="images/art/iron-man.jpg" alt="Iron Man pencil artwork" loading="lazy">
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
 
-            <div class="art-grid">
-                <div class="art-tile">add image</div>
-                <div class="art-tile">add image</div>
-                <div class="art-tile">add image</div>
-                <div class="art-tile">add image</div>
-                <div class="art-tile">add image</div>
-                <div class="art-tile">add image</div>
-            </div>
+    <div class="art-modal" data-art-modal hidden>
+        <div class="art-modal-backdrop" data-art-close></div>
+        <div class="art-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="art-modal-caption">
+            <button class="art-modal-close" type="button" aria-label="Close image viewer" data-art-close>&times;</button>
+            <button class="art-modal-nav prev" type="button" aria-label="Previous image" data-art-prev>&#8592;</button>
+            <button class="art-modal-nav next" type="button" aria-label="Next image" data-art-next>&#8594;</button>
+
+            <figure class="art-modal-figure">
+                <div class="art-modal-image-wrap">
+                    <img class="art-modal-image" src="" alt="">
+                </div>
+                <figcaption class="art-modal-caption" id="art-modal-caption"></figcaption>
+            </figure>
         </div>
     </div>
+
+    <script>
+        (() => {
+            const buttons = [...document.querySelectorAll('.art-button')];
+            const modal = document.querySelector('[data-art-modal]');
+            const modalImage = modal?.querySelector('.art-modal-image');
+            const modalCaption = modal?.querySelector('.art-modal-caption');
+            const closeButtons = [...document.querySelectorAll('[data-art-close]')];
+            const prevButton = document.querySelector('[data-art-prev]');
+            const nextButton = document.querySelector('[data-art-next]');
+
+            if (!buttons.length || !modal || !modalImage || !modalCaption) return;
+
+            const items = buttons.map((button) => {
+                const img = button.querySelector('img');
+                return {
+                    src: img?.getAttribute('src') || '',
+                    alt: img?.getAttribute('alt') || '',
+                    caption: button.dataset.caption || img?.getAttribute('alt') || ''
+                };
+            });
+
+            let current = 0;
+            let lastFocused = null;
+
+            const render = (index) => {
+                current = (index + items.length) % items.length;
+                const item = items[current];
+                modalImage.src = item.src;
+                modalImage.alt = item.alt;
+                modalCaption.textContent = item.caption;
+            };
+
+            const openModal = (index, trigger) => {
+                lastFocused = trigger || document.activeElement;
+                render(index);
+                modal.hidden = false;
+                document.body.classList.add('modal-open');
+                nextButton?.focus();
+            };
+
+            const closeModal = () => {
+                modal.hidden = true;
+                document.body.classList.remove('modal-open');
+                if (lastFocused && typeof lastFocused.focus === 'function') {
+                    lastFocused.focus();
+                }
+            };
+
+            buttons.forEach((button, idx) => {
+                button.addEventListener('click', () => openModal(idx, button));
+            });
+
+            closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
+            prevButton?.addEventListener('click', () => render(current - 1));
+            nextButton?.addEventListener('click', () => render(current + 1));
+
+            document.addEventListener('keydown', (event) => {
+                if (modal.hidden) return;
+                if (event.key === 'Escape') closeModal();
+                if (event.key === 'ArrowLeft') render(current - 1);
+                if (event.key === 'ArrowRight') render(current + 1);
+            });
+        })();
+    </script>
 </body>
 </html>
