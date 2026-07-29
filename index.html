@@ -154,6 +154,7 @@
     </main>
 
     <script>
+		// carousel handling
         (() => {
             const carousel = document.querySelector('[data-home-carousel]');
             if (!carousel) return;
@@ -231,6 +232,52 @@
             showSlide(0);
             startTimer();
         })();
+		
+		// rainbow text handling
+		let frame = 0;
+		function animateText() {
+		  const colour = getColour(frame, accent_colour_table);
+		  document.documentElement.style.setProperty("--accent", colour)
+		  const colour_rgb = getColour(frame, accent_rgb_colour_table);
+		  document.documentElement.style.setProperty("--accent-rgb", colour_rgb);
+		  frame ++;
+		  requestAnimationFrame(animateText);
+		}
+
+
+		const shift_time = 600;
+		const accent_colour_table = [
+		[shift_time, "#38e8c6"], 
+		[2 * shift_time, "#3897e5"], 
+		[3 * shift_time, "#7238e5"], 
+		[4 * shift_time, "#ba38e5"], 
+		[5 * shift_time, "#e53872"], 
+		[6 * shift_time, "#e56c38"],
+		[7 * shift_time, "#ace538"],
+		[8 * shift_time, "#38e541"],
+		];
+		const accent_rgb_colour_table = [
+		[shift_time, "56, 232, 198"], 
+		[2 * shift_time, "56, 121, 229"], 
+		[3 * shift_time, "114, 56, 229"], 
+		[4 * shift_time, "186, 56, 229"], 
+		[5 * shift_time, "229, 56, 114"], 
+		[6 * shift_time, "229, 108, 56"],
+		[7 * shift_time, "172, 229, 56"],
+		[8 * shift_time, "56, 229, 65"],
+		];
+		const colour_mod = shift_time * accent_colour_table.length;
+		
+		function getColour(frame, colour_table) {
+		  const t = frame % colour_mod;
+		  
+		  for (let i = 0; i < colour_table.length; i++) {
+			const [duration, x] = colour_table[i];
+			if (t < duration) return x;
+		  }
+		  return 0;
+		}
+		animateText();
     </script>
 </body>
 </html>
