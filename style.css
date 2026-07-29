@@ -400,6 +400,82 @@ body.home-body {
 .btn-primary:hover {
     filter: brightness(1.08);
 }
+
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-lit);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    margin-top: 0.5rem;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.06);
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+}
+
+.home-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-left: 0.2rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-lit);
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 999px;
+    border: 1px solid var(--border-lit);
+    color: var(--muted);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.08);
+    outline: none;
+}
+
+.social-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 640px) {
+    .home-socials {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+    }
+}
 /* =============================================================
    ABOUT PAGE - INTRO PANEL + BIOGRAPHY/SLIDESHOW
    ============================================================= */
@@ -950,15 +1026,11 @@ body.home-body {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.12), transparent 22%),
-        radial-gradient(circle at 68% 42%, rgba(255, 200, 120, 0.15), transparent 24%),
-        radial-gradient(circle at 50% 70%, rgba(90, 130, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, rgba(9, 12, 18, 0.4), rgba(5, 7, 10, 0.82)),
         var(--slide-image);
     background-color: #090c14;
     background-position: center;
     background-size: cover;
-    filter: saturate(1.02);
+    filter: saturate(1.04);
     transform: scale(1.01);
 }
 
@@ -969,9 +1041,9 @@ body.home-body {
     background:
         linear-gradient(
             to bottom,
-            rgba(5, 7, 10, 0.08) 38%,
-            rgba(5, 7, 10, 0.84) 88%,
-            rgba(5, 7, 10, 0.96) 100%
+            rgba(5, 7, 10, 0) 60%,
+            rgba(5, 7, 10, 0.65) 90%,
+            rgba(5, 7, 10, 0.88) 100%
         );
     pointer-events: none;
 }
