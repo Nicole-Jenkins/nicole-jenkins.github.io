@@ -109,6 +109,7 @@ body.home-body {
 
 .title {
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -141,6 +142,7 @@ body.home-body {
 
 .links a:hover {
     color: var(--accent);
+	transition: color 2s;
 }
 
 /* Animated underline effect on hover */
@@ -152,6 +154,7 @@ body.home-body {
     bottom: 0;
     left: 0;
     background-color: var(--accent);
+	transition: background-color 2s;
     transition: width 0.3s ease;
 }
 
@@ -230,6 +233,7 @@ body.home-body {
 
 .sitenav-links a:hover {
     color: var(--text);
+	transition: color 2s;
 }
 
 .sitenav-links a.active {
@@ -268,6 +272,7 @@ body.home-body {
 
 .page-eyebrow {
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -298,6 +303,7 @@ body.home-body {
     padding: 1.1rem 1.3rem;
     margin-bottom: 1.5rem;
     color: var(--muted);
+	transition: color 2s;
     font-size: 0.85rem;
     line-height: 1.6;
 }
@@ -419,7 +425,7 @@ body.home-body {
     padding: 0.7rem 1.3rem;
     border-radius: 999px;
     margin-top: 0.5rem;
-    transition: filter 0.2s ease;
+    transition: filter 0.2s ease, background 2s;
 }
 
 .btn-primary:hover {
@@ -444,6 +450,7 @@ body.home-body {
 .btn-secondary:hover {
     border-color: var(--accent);
     color: var(--accent);
+	transition: border-color 2s, color 2s, background 2s;
     background: rgba(var(--accent-rgb), 0.06);
 }
 
@@ -485,6 +492,7 @@ body.home-body {
 .social-icon:focus-visible {
     color: var(--accent);
     border-color: var(--accent);
+	transition: border-color 2s, color 2s, background 2s;
     background: rgba(var(--accent-rgb), 0.08);
     outline: none;
 }
@@ -519,6 +527,7 @@ body.home-body {
         radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.075), transparent 34%),
         linear-gradient(180deg, rgba(20, 24, 33, 0.94), rgba(13, 17, 24, 0.9));
     box-shadow: 0 24px 60px -42px rgba(0, 0, 0, 0.82);
+	transition: background 2s;
 }
 
 .about-hero::before {
@@ -529,6 +538,7 @@ body.home-body {
     width: 76px;
     height: 2px;
     background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb), 0));
+	transition: background 2s;
     opacity: 0.88;
 }
 
@@ -598,6 +608,7 @@ body.home-body {
 
 .about-gallery-kicker {
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.68rem;
     letter-spacing: 0.11em;
     text-transform: uppercase;
@@ -626,9 +637,11 @@ body.home-body {
 
 .about-carousel:focus-visible {
     border-color: var(--accent);
+	transition: border-color 2s;
     box-shadow:
         0 0 0 3px rgba(var(--accent-rgb), 0.16),
         0 28px 65px -36px rgba(0, 0, 0, 0.95);
+	transition: box-shadow 2s;
 }
 
 .about-slide {
@@ -700,6 +713,7 @@ body.home-body {
 .about-slide figcaption .mono {
     display: block;
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.64rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -738,6 +752,7 @@ body.home-body {
     color: var(--text);
     border-color: var(--accent);
     background: rgba(var(--accent-rgb), 0.08);
+	transition: border-color 2s, background 2s;
     transform: translateY(-1px);
     outline: none;
 }
@@ -768,6 +783,7 @@ body.home-body {
 .about-carousel-dots button:focus-visible {
     opacity: 0.9;
     outline: 2px solid rgba(var(--accent-rgb), 0.35);
+	transition: outline 2s;
     outline-offset: 3px;
 }
 
@@ -870,6 +886,7 @@ body.home-body {
     box-shadow:
         0 0 6px rgba(var(--accent-rgb), 0.95),
         0 0 14px rgba(var(--accent-rgb), 0.4);
+	transition: box-shadow 2s;
 }
 /* =============================================================
    HOMEPAGE HERO - PROFILE + GALAXY SLIDESHOW
@@ -900,6 +917,7 @@ body.home-body {
     background:
         radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.09), transparent 34%),
         rgba(18, 22, 29, 0.52);
+	transition: background 2s;
 }
 
 .home-copy {
@@ -915,6 +933,7 @@ body.home-body {
     align-items: center;
     gap: 0.65rem;
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -931,6 +950,7 @@ body.home-body {
     box-shadow:
         0 0 6px rgba(var(--accent-rgb), 0.95),
         0 0 14px rgba(var(--accent-rgb), 0.4);
+	transition: box-shadow 2s, background 2s;
 }
 
 .home-identity {
@@ -982,6 +1002,7 @@ body.home-body {
 .home-now-label {
     display: block;
     color: var(--accent);
+	transition: color 2s;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.1em;
@@ -1011,6 +1032,7 @@ body.home-body {
 
 .home-galaxy-kicker {
     color: var(--accent);
+	transition: color 2s;
     font-size: 0.68rem;
     letter-spacing: 0.11em;
     text-transform: uppercase;
@@ -1080,6 +1102,7 @@ body.home-body {
     bottom: 1rem;
     z-index: 2;
     color: var(--text);
+	transition: color 2s;
     font-size: 0.86rem;
     line-height: 1.5;
     text-shadow: 0 1px 14px rgba(0, 0, 0, 0.9);
@@ -1129,7 +1152,9 @@ body.home-body {
 .home-galaxy-arrow:focus-visible {
     color: var(--text);
     border-color: var(--accent);
+	transition: border-color 2s;
     background: rgba(var(--accent-rgb), 0.08);
+	transition: background 2s;
     outline: none;
 }
 
@@ -1150,6 +1175,7 @@ body.home-body {
     opacity: 0.9;
     outline: 2px solid rgba(var(--accent-rgb), 0.35);
     outline-offset: 3px;
+	transition: outline 2s;
 }
 
 .home-galaxy-dots button.is-active {
