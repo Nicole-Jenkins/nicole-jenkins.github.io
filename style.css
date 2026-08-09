@@ -354,6 +354,16 @@ body.home-body {
     padding: 0.2rem 0.6rem;
 }
 
+.work-card p a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(var(--accent-rgb), 0.4);
+}
+
+.work-card p a:hover {
+    color: var(--text);
+}
+
 /* --- Work cards as links --- */
 .work-card {
     display: block;
