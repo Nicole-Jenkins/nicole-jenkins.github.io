@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITS Viewer - Astrophysics Portfolio</title>
+    <meta name="description" content="FITS Viewer: a free desktop app for browsing folders of FITS astronomy images - auto-stretched colour thumbnails, full-size previews and fast sorting of subs. Windows, macOS and Linux.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nicole-jenkins.github.io/fits-viewer.html">
+    <meta property="og:title" content="FITS Viewer - browse and sort FITS images fast">
+    <meta property="og:description" content="Free desktop app for browsing folders of FITS astronomy images. Windows, macOS and Linux.">
+    <meta property="og:image" content="https://nicole-jenkins.github.io/images/fits-viewer/grid-seestar-subs.jpg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="sitenav mono">
+        <div class="sitenav-inner">
+            <a href="index.html" class="sitenav-logo">Nicole Jenkins</a>
+            <nav class="sitenav-links">
+                <a href="about.html">About</a>
+                <a href="work.html">Work</a>
+                <a href="art.html">Art</a>
+                <a href="astrophotography.html">Astrophotography</a>
+                <a href="channel_mapping.html">Colour Mapping</a>
+                <a href="resources.html" class="active">Resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-shell">
+        <div class="page-inner">
+            <a href="resources.html" class="fv-back mono">&#8592; Resources</a>
+            <div class="page-eyebrow mono">Software</div>
+            <h1 class="page-title">FITS Viewer</h1>
+            <p class="page-lede">A free desktop app for browsing folders of FITS astronomy images. Open a folder and every frame appears as an auto-stretched thumbnail, in colour where the data allows, with the key header details alongside - so you can see what a night's data actually holds, and sort it, without opening a full processing suite.</p>
+
+            <!-- Downloads -->
+            <section class="work-card fv-section" id="download">
+                <h3>Download</h3>
+                <div class="download-row" data-fv-downloads>
+                    <a class="btn-secondary" data-os="windows" href="https://github.com/Nicole-Jenkins/FITS-Viewer/releases/latest/download/FITS-Viewer-Windows.exe">Download for Windows</a>
+                    <a class="btn-secondary" data-os="mac" href="https://github.com/Nicole-Jenkins/FITS-Viewer/releases/latest/download/FITS-Viewer-macOS.zip">Download for macOS</a>
+                    <a class="btn-secondary" data-os="linux" href="https://github.com/Nicole-Jenkins/FITS-Viewer/releases/latest/download/FITS-Viewer-Linux.AppImage">Download for Linux</a>
+                </div>
+                <p class="download-meta mono"><span data-fv-version>Always the latest version</span> &middot; free &middot; no install or Python needed &middot; <a href="https://github.com/Nicole-Jenkins/FITS-Viewer/releases" target="_blank" rel="noopener">all releases</a> &middot; <a href="https://github.com/Nicole-Jenkins/FITS-Viewer" target="_blank" rel="noopener">GitHub</a></p>
+                <details class="download-help">
+                    <summary class="mono">First time opening it?</summary>
+                    <p><b>Windows:</b> double-click the download. If Windows shows "Windows protected your PC", click <b>More info</b> then <b>Run anyway</b> (it appears because the app isn't commercially signed).</p>
+                    <p><b>macOS:</b> unzip the download, then right-click <b>FITS Viewer.app</b> &rarr; <b>Open</b> &rarr; <b>Open</b>. You only need to do this once; after that it opens normally.</p>
+                    <p><b>Linux:</b> right-click the .AppImage &rarr; Properties &rarr; Permissions &rarr; allow executing as a program, then double-click it.</p>
+                </details>
+            </section>
+
+            <!-- Screenshots -->
+            <section class="fv-section">
+                <h2 class="fv-heading">Screenshots</h2>
+                <div class="fv-gallery">
+                    <figure class="fv-shot fv-shot-wide">
+                        <a href="images/fits-viewer/folder-previews.jpg" target="_blank" rel="noopener"><img src="images/fits-viewer/folder-previews.jpg" alt="FITS Viewer showing a Seestar S50 Pro folder as a grid of folder tiles, each with a colour preview of the first image inside and a count of its files" loading="lazy"></a>
+                        <figcaption><span class="mono">Folder previews</span> A whole season of Seestar S50 Pro targets at a glance - each folder tile shows a preview of the first image inside and how many files it holds. Double-click to open one.</figcaption>
+                    </figure>
+                    <figure class="fv-shot fv-shot-wide">
+                        <a href="images/fits-viewer/stacked-colour.jpg" target="_blank" rel="noopener"><img src="images/fits-viewer/stacked-colour.jpg" alt="Three stacked Seestar images of the Lagoon Nebula in colour, with their header details" loading="lazy"></a>
+                        <figcaption><span class="mono">Stacked images in colour</span> Three nights of stacked Lagoon Nebula (M 8) data, side by side with the header details and plate-solved field of view.</figcaption>
+                    </figure>
+                    <figure class="fv-shot">
+                        <a href="images/fits-viewer/grid-seestar-subs.jpg" target="_blank" rel="noopener"><img src="images/fits-viewer/grid-seestar-subs.jpg" alt="A grid of colour thumbnails of raw Seestar sub-frames of the Lagoon Nebula" loading="lazy"></a>
+                        <figcaption><span class="mono">Raw subs</span> Individual 30 s Seestar sub-frames, debayered to colour and auto-stretched. The faint and hazy frames stand out straight away.</figcaption>
+                    </figure>
+                    <figure class="fv-shot">
+                        <a href="images/fits-viewer/compare-side-by-side.jpg" target="_blank" rel="noopener"><img src="images/fits-viewer/compare-side-by-side.jpg" alt="Three sub-frames open side by side in separate full-size preview windows" loading="lazy"></a>
+                        <figcaption><span class="mono">Compare side by side</span> Select several frames and press Ctrl+Space to open each full size. Field of view is estimated from the optics when there's no plate-solve.</figcaption>
+                    </figure>
+                    <figure class="fv-shot fv-shot-wide">
+                        <a href="images/fits-viewer/research-data.jpg" target="_blank" rel="noopener"><img src="images/fits-viewer/research-data.jpg" alt="FITS Viewer showing Hubble drizzled images, a VLT MUSE image and R, G and B frames of NGC 1566 in greyscale" loading="lazy"></a>
+                        <figcaption><span class="mono">Research data too</span> Hubble drizzled images, a VLT/MUSE image and separate R, G and B frames of NGC 1566 - mono, multi-extension and gzip-compressed files all load.</figcaption>
+                    </figure>
+                </div>
+                <!-- Video goes here later, e.g.:
+                <div class="fv-video">
+                    <video controls preload="metadata" poster="images/fits-viewer/grid-seestar-subs.jpg">
+                        <source src="images/fits-viewer/fits-viewer-demo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                -->
+            </section>
+
+            <!-- Features -->
+            <section class="fv-section">
+                <h2 class="fv-heading">What it does</h2>
+                <div class="fv-features">
+                    <div class="work-card">
+                        <h3>See a whole session at once</h3>
+                        <p>Thumbnails use the same median/MAD auto-stretch approach as PixInsight's and Siril's screen stretch, so faint signal is visible straight away. Thumbnails are averaged down rather than subsampled, so star fields stay clean.</p>
+                    </div>
+                    <div class="work-card">
+                        <h3>Colour where the data has it</h3>
+                        <p>Stacked RGB images and raw one-shot-colour sub-frames (e.g. Seestar subs, via their Bayer pattern) are shown in colour. Mono, multi-extension (e.g. Hubble) and gzip-compressed files are handled too.</p>
+                    </div>
+                    <div class="work-card">
+                        <h3>Header details alongside</h3>
+                        <p>Target, filter, exposure, date, telescope, coordinates and field of view - from the plate-solve where there is one, otherwise estimated from focal length and pixel size.</p>
+                    </div>
+                    <div class="work-card">
+                        <h3>Sort out the duds</h3>
+                        <p>Mark frames or whole folders and send them to the Recycle Bin / Trash in one go. Nothing is ever deleted permanently, and the confirmation lists exactly what's inside each folder first.</p>
+                    </div>
+                    <div class="work-card">
+                        <h3>Find your way around</h3>
+                        <p>Favourites, an Up button, and folder tiles that preview the first image inside - handy for nested layouts like the Seestar's per-target folders.</p>
+                    </div>
+                    <div class="work-card">
+                        <h3>Export</h3>
+                        <p>Save any frame's stretched view as a full-resolution PNG, JPEG or TIFF for quick sharing.</p>
+                    </div>
+                </div>
+                <p class="fv-note">FITS Viewer is for browsing and sorting - it doesn't stack or process data. Use it before your processing software, not instead of it.</p>
+            </section>
+
+            <!-- Latest release -->
+            <section class="work-card fv-section" id="latest-release">
+                <h3 data-fv-release-title>What's new in v1.4.0</h3>
+                <div class="fv-release" data-fv-release-body>
+                    <h4>Browsing</h4>
+                    <ul>
+                        <li>Folders full of subfolders now show folder tiles - each with a preview of the first image inside and a count of what's in it. Double-click to open; new Up button (Alt+Up) to go back.</li>
+                        <li>Select several images with Ctrl+click / Shift+click, then press Ctrl+Space to open each in its own window.</li>
+                        <li>Left/Right arrow keys flick between images in the full-size view.</li>
+                    </ul>
+                    <h4>Seestar and colour cameras</h4>
+                    <ul>
+                        <li>Stacked Seestar images and raw colour-camera sub-frames now show in full colour.</li>
+                        <li>Field of view is now shown for files without a plate-solve, estimated from focal length and pixel size.</li>
+                    </ul>
+                    <h4>Cleaner thumbnails</h4>
+                    <ul>
+                        <li>Thumbnails are now made by averaging pixels instead of skipping them - much smoother, with far less speckle on star fields.</li>
+                    </ul>
+                    <h4>Deleting</h4>
+                    <ul>
+                        <li>Fixed: "Delete Marked Files" failed on Windows with "The system cannot find the path specified".</li>
+                        <li>Whole folders can now be marked and deleted, with a confirmation that lists exactly what's inside.</li>
+                    </ul>
+                </div>
+                <p class="download-meta mono"><a href="https://github.com/Nicole-Jenkins/FITS-Viewer/releases" target="_blank" rel="noopener">Full release history on GitHub &#8599;</a></p>
+            </section>
+
+            <!-- Feedback -->
+            <section class="work-card fv-section">
+                <h3>Feedback and bug reports</h3>
+                <p>Found a bug, or have a file that doesn't display properly? Please <a href="https://github.com/Nicole-Jenkins/FITS-Viewer/issues" target="_blank" rel="noopener">open an issue on GitHub</a> - a screenshot and a note on which telescope/camera made the file helps a lot. FITS Viewer is free to download and use; see the <a href="https://github.com/Nicole-Jenkins/FITS-Viewer" target="_blank" rel="noopener">GitHub page</a> for the licence.</p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // Highlight the download for the visitor's own system. If this
+            // fails, all three buttons still work.
+            var row = document.querySelector('[data-fv-downloads]');
+            if (row) {
+                var ua = (navigator.userAgent || '').toLowerCase();
+                var os = ua.indexOf('windows') !== -1 ? 'windows'
+                       : (ua.indexOf('mac') !== -1 && ua.indexOf('iphone') === -1 && ua.indexOf('ipad') === -1) ? 'mac'
+                       : (ua.indexOf('linux') !== -1 && ua.indexOf('android') === -1) ? 'linux'
+                       : null;
+                var mine = os && row.querySelector('[data-os="' + os + '"]');
+                if (mine) {
+                    mine.classList.remove('btn-secondary');
+                    mine.classList.add('btn-primary');
+                    row.insertBefore(mine, row.firstChild);
+                }
+            }
+
+            // Turn GitHub release notes (simple Markdown) into HTML. Text is
+            // escaped first, so nothing in the notes can inject markup.
+            function escapeHtml(s) {
+                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+            function inline(s) {
+                return escapeHtml(s)
+                    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+                    .replace(/`(.+?)`/g, '<code>$1</code>');
+            }
+            function renderNotes(md) {
+                var html = [], inList = false;
+                md.replace(/\r/g, '').split('\n').forEach(function (raw) {
+                    var line = raw.trim();
+                    var bullet = /^[-*] (.*)$/.exec(line);
+                    if (bullet) {
+                        if (!inList) { html.push('<ul>'); inList = true; }
+                        html.push('<li>' + inline(bullet[1]) + '</li>');
+                        return;
+                    }
+                    if (inList) { html.push('</ul>'); inList = false; }
+                    if (!line) return;
+                    var heading = /^#{2,6} (.*)$/.exec(line) || /^\*\*(.+)\*\*$/.exec(line);
+                    if (heading) {
+                        // The release title is shown separately - skip a "What's new" heading.
+                        if (!/^what'?s new/i.test(heading[1])) html.push('<h4>' + inline(heading[1]) + '</h4>');
+                        return;
+                    }
+                    html.push('<p>' + inline(line) + '</p>');
+                });
+                if (inList) html.push('</ul>');
+                return html.join('');
+            }
+
+            // Latest version + its release notes, straight from GitHub. The
+            // notes written into this page are shown if GitHub can't be reached.
+            if (!window.fetch) return;
+            fetch('https://api.github.com/repos/Nicole-Jenkins/FITS-Viewer/releases/latest')
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (data) {
+                    if (!data || !data.tag_name) return;
+                    var label = document.querySelector('[data-fv-version]');
+                    if (label) label.textContent = 'Latest version: ' + data.tag_name;
+                    var title = document.querySelector('[data-fv-release-title]');
+                    var body = document.querySelector('[data-fv-release-body]');
+                    if (title && body && data.body) {
+                        var date = data.published_at ? new Date(data.published_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+                        title.textContent = "What's new in " + data.tag_name + (date ? ' (' + date + ')' : '');
+                        body.innerHTML = renderNotes(data.body);
+                    }
+                })
+                .catch(function () {});
+        })();
+    </script>
+</body>
+</html>

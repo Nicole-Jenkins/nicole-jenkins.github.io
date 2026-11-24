@@ -1231,3 +1231,199 @@ body.home-body {
         transition: none;
     }
 }
+
+/* --- FITS Viewer download card (Resources page) --- */
+.download-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0.2rem 0 0.9rem;
+}
+
+.download-row a {
+    margin-top: 0;
+}
+
+.work-card .download-meta {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.download-help summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.75rem;
+    margin-bottom: 0.6rem;
+}
+
+.download-help p {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.download-help b {
+    color: var(--text);
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .download-row a {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+}
+
+.home-now p a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(var(--accent-rgb), 0.4);
+}
+
+/* --- FITS Viewer page --- */
+.fv-back {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-decoration: none;
+    margin-bottom: 1.4rem;
+}
+
+.fv-back:hover {
+    color: var(--accent);
+}
+
+.fv-section {
+    margin-bottom: 2.2rem;
+}
+
+.fv-section.work-card:hover {
+    transform: none;  /* info panels, not links - no hover lift */
+    border-color: var(--border-lit);
+    background: var(--panel);
+}
+
+.fv-heading {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.fv-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.fv-shot {
+    margin: 0;
+    background: var(--panel);
+    border: 1px solid var(--border-lit);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.fv-shot-wide {
+    grid-column: 1 / -1;
+}
+
+.fv-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.fv-shot figcaption {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    padding: 0.8rem 1rem 1rem;
+}
+
+.fv-shot figcaption span {
+    display: block;
+    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.fv-video video {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border-lit);
+    margin-top: 1rem;
+}
+
+.fv-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.fv-features .work-card:hover {
+    transform: none;
+    border-color: var(--border-lit);
+    background: var(--panel);
+}
+
+.fv-features .work-card p {
+    margin-bottom: 0;
+}
+
+.fv-note {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.fv-release h4 {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    margin: 1rem 0 0.4rem;
+}
+
+.fv-release ul {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.fv-release li {
+    margin-bottom: 0.3rem;
+}
+
+.fv-release p {
+    margin-bottom: 0.5rem;
+}
+
+.fv-release code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+
+.fv-card-shot {
+    display: block;
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    border: 1px solid var(--border-lit);
+    margin: 0.4rem 0 0.8rem;
+}
+
+@media (max-width: 900px) {
+    .fv-features {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .fv-gallery,
+    .fv-features {
+        grid-template-columns: 1fr;
+    }
+}
