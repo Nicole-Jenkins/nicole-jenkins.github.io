@@ -1427,3 +1427,42 @@ body.home-body {
         grid-template-columns: 1fr;
     }
 }
+
+/* FITS Viewer page header: text on the left, logo on the right */
+.fv-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+}
+
+.fv-hero-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2.5rem; /* matches the lede's bottom margin, so it centres on the text */
+}
+
+.fv-hero-logo img {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    .fv-hero {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .fv-hero-logo {
+        order: -1;              /* logo first on narrow screens */
+        justify-content: flex-start;
+        padding-bottom: 1.6rem;
+    }
+
+    .fv-hero-logo img {
+        max-width: 300px;
+    }
+}
